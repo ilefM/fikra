@@ -16,7 +16,12 @@ export default function Navbar() {
 function NavigationPanel() {
   return (
     <div className="flex justify-start items-center w-1/3 pr-10">
-      <p className="text-2xl lg:text-3xl mr-10">Fikra</p>
+      <Link
+        to="/"
+        className="text-2xl lg:text-3xl mr-10 hover:text-gray-400 hover:tansition-all hover:duration-150 hover:ease-linear"
+      >
+        Fikra
+      </Link>
 
       <div className="flex items-center w-2/3 space-x-5 lg:space-x-10">
         <Link
