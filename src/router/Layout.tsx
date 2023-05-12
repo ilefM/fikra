@@ -11,7 +11,7 @@ export default function Layout() {
       <div className="block sm:hidden">
         <MobileNavbar />
       </div>
-      <div className="flex flex-col items-center pt-16 pb-8 px-8">
+      <div className="flex flex-col items-center border pt-16 pb-8 px-8">
         <Outlet />
       </div>
     </div>
