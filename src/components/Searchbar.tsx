@@ -2,7 +2,7 @@ import { BiSearch } from "react-icons/bi";
 
 export default function Searchbar() {
   return (
-    <div className="flex items-center justify-between bg-gray-600 h-10 w-full p-2 rounded-lg cursor-text">
+    <div className="flex items-center justify-between bg-dark-300 h-10 w-full p-2 rounded-lg cursor-text">
       <input
         type="text"
         placeholder="Search"
