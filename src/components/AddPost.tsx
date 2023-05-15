@@ -24,7 +24,7 @@ export default function AddPost(props: IProps) {
     <div className="p-5 mb-6 rounded-lg w-full shadow-md bg-dark-200">
       <form onSubmit={publishPost} className="flex flex-col w-full items-start">
         <textarea
-          placeholder="Share you pet project idea"
+          placeholder="Share your pet project idea"
           value={content}
           onChange={(e) => {
             setContent(e.target.value);
