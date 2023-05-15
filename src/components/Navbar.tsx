@@ -3,7 +3,7 @@ import Searchbar from "./Searchbar";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-8 w-full h-16 m-0 lg:text-lg text-base">
+    <nav className="flex items-center justify-between px-8 w-full h-16 m-0">
       <NavigationPanel />
       <div className="flex justify-center items-center w-4/12 ">
         <Searchbar />
@@ -18,7 +18,7 @@ function NavigationPanel() {
     <div className="flex justify-start items-center w-1/3 pr-10">
       <Link
         to="/"
-        className="text-2xl lg:text-3xl mr-10 hover:text-gray-400 text-[#FF4545] hover:transition-all hover:ease-linear"
+        className="text-2xl lg:text-3xl mr-10 hover:text-gray-400 text-red-custom hover:transition-all hover:ease-linear"
       >
         Fikra
       </Link>
@@ -28,18 +28,16 @@ function NavigationPanel() {
 
 function ControlPanel() {
   return (
-    <div className="flex items-center justify-end w-1/3">
+    <div className="flex items-center justify-end w-1/3 lg:text-lg">
       <Link
-        className="hover:text-gray-400 hover:transition-all hover:ease-linear"
+        className="hover:text-gray-400 mr-2 hover:transition-all hover:ease-linear"
         to="/login"
       >
         Login
       </Link>
 
-      <div className="h-10 w-px m-2 bg-slate-200"></div>
-
       <Link
-        className="bg-[#ac2f2f] p-2 rounded-md hover:text-dark-300 hover:bg-slate-100 hover:transition-all hover:duration-300 hover:ease-linear"
+        className="bg-[#ac2f2f] p-2 ml-2 rounded-md hover:text-dark-400 hover:bg-light-200 hover:transition-all hover:ease-linear hover:duration-300"
         to="/signup"
       >
         Sign up
