@@ -11,18 +11,18 @@
 }
 
 body {
-  overflow-y: scroll;
+  overflow: overlay;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 5px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: #96a3af;
-}
+/* ::-webkit-scrollbar-track {
+  background: transparent;
+} */
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -33,17 +33,4 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #babbbc;
-}
-
-@layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
 }

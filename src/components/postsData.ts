@@ -16,4 +16,14 @@ export const postsDefault: IPost[] = [
     username: crypto.randomUUID(),
     content: "this is some content",
   },
+  {
+    id: crypto.randomUUID(),
+    username: crypto.randomUUID(),
+    content: "this is some content",
+  },
+  {
+    id: crypto.randomUUID(),
+    username: crypto.randomUUID(),
+    content: "this is some content",
+  },
 ];
