@@ -2,10 +2,11 @@ import { BiHomeAlt2, BiSearch } from "react-icons/bi";
 import { MdOutlineExplore } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function MobileNavbar() {
   return (
-    <div className="flex items-center justify-around bg-[#1A2026]">
+    <div className="fixed bottom-0 left-0 flex items-center justify-around bg-dark-300 w-full">
       <Link to="/">
         <BiHomeAlt2 size="22px" />
       </Link>
@@ -21,6 +22,8 @@ export default function MobileNavbar() {
       <Link to="/profile">
         <AiOutlineUser size="22px" />
       </Link>
+
+      <ThemeSwitcher />
     </div>
   );
 }

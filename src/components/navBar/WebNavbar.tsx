@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Searchbar from "../Searchbar";
+import ThemeSwitcher from "./ThemeSwitcher";
 
-export default function DefaultNavBar() {
+export default function WebNavBar() {
   return (
-    <div className="hidden sm:flex items-center w-full">
+    <div className="flex items-center justify-between w-full overflow-hidden px-4 md:px-8 h-16">
       <div className="flex items-center w-1/2">
         <Link
           to="/"
@@ -16,6 +17,7 @@ export default function DefaultNavBar() {
         </div>
       </div>
       <NavigationPanelOnline />
+      <ThemeSwitcher />
     </div>
   );
 }
