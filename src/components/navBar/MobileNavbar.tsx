@@ -6,7 +6,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function MobileNavbar() {
   return (
-    <div className="fixed bottom-0 left-0 flex items-center justify-around bg-dark-300 w-full">
+    <div className="fixed bottom-0 left-0 flex items-center justify-around bg-dark-300 w-full h-12">
       <Link to="/">
         <BiHomeAlt2 size="22px" />
       </Link>
