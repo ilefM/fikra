@@ -21,7 +21,7 @@ export default function Navbar() {
       <div className="hidden sm:block w-full">
         <DefaultNavBar />
       </div>
-      <div className="block sm:hidden w-4/5">
+      <div className="block sm:hidden w-11/12">
         <MobileNavbar />
       </div>
       <button className="sm:ml-5" onClick={changeTheme}>

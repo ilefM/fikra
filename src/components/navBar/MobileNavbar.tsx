@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function MobileNavbar() {
   return (
-    <div className="flex items-center justify-around bg-[#1A2026]">
+    <div className="flex items-center space-x-14">
       <Link to="/">
         <BiHomeAlt2 size="22px" />
       </Link>
