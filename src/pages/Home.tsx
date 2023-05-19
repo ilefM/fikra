@@ -1,24 +1,11 @@
 import { useState } from "react";
 import AddPost from "../components/AddPost";
-import { IPost } from "../interfaces/IPost";
 import Post from "../components/Post";
 import { motion } from "framer-motion";
-
-const postsDefault: IPost[] = [
-  {
-    id: crypto.randomUUID(),
-    username: crypto.randomUUID(),
-    content: "this is some content",
-  },
-  {
-    id: crypto.randomUUID(),
-    username: crypto.randomUUID(),
-    content: "this is some content",
-  },
-];
+import { postsDefault } from "../components/postsData";
 
 export default function Home() {
-  const [posts, setPosts] = useState<IPost[]>(postsDefault);
+  const [posts, setPosts] = useState(postsDefault);
 
   function addPost(content: string) {
     setPosts((newPosts) => {
@@ -34,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <div className="h-full w-9/12 md:w-[768px]">
+    <div className="h-full w-10/12 md:w-[700px]">
       <AddPost addNewPost={addPost} />
       {posts.length === 0 ? (
         <NoPosts />
