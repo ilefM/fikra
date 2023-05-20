@@ -5,6 +5,7 @@ export default {
     screens: {
       sm: "600px",
       md: "768px",
+      lg: "1280px",
     },
     extend: {
       colors: {
@@ -18,7 +19,10 @@ export default {
           0: "#F8F9FA",
         },
         light: {
-          200: "#F1F5F9",
+          300: "#F8F9FA",
+          200: "#E9ECEF",
+          100: "#DEE2E6",
+          0: "#F8F9FA",
         },
       },
     },
