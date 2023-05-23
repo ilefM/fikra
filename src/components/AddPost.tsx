@@ -21,17 +21,17 @@ export default function AddPost(props: IProps) {
   }
 
   return (
-    <div className="p-5 mb-6 rounded-lg w-full shadow-md bg-dark-200">
-      <form onSubmit={publishPost} className="flex flex-col w-full items-start">
+    <div className="mb-6 w-full rounded-lg bg-dark-200 p-5 shadow-md">
+      <form onSubmit={publishPost} className="flex w-full flex-col items-start">
         <textarea
           placeholder="Share your pet project idea"
           value={content}
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          className="bg-transparent break-words resize-none outline-none w-full min-h-[100px] no-scrollbar"
+          className="no-scrollbar min-h-[100px] w-full resize-none break-words bg-transparent outline-none"
         />
-        <button className="mt-5 text-red-custom hover:text-gray-400 hover:transition-all ml-auto hover:ease-linear">
+        <button className="ml-auto mt-5 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear">
           <BsSendFill size={17} />
         </button>
       </form>
