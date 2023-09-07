@@ -2,10 +2,9 @@ import { useState } from "react";
 import AddPost from "../components/AddPost";
 import Post from "../components/Post";
 import { motion } from "framer-motion";
-import { postsDefault } from "../components/postsData";
 
 export default function Home() {
-  const [posts, setPosts] = useState(postsDefault);
+  const [posts, setPosts] = useState([{}]);
 
   function addPost(content: string) {
     setPosts((newPosts) => {
