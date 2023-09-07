@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { baseApiUrl } from "../utils/constants";
+import { BASE_API_URL } from "../utils/api";
 
-const getErrorMessage = (error: unknown) => {
+function getErrorMessage(error: unknown) {
   let message: string;
   if (error instanceof Error) {
     message = error.message;
@@ -13,14 +13,14 @@ const getErrorMessage = (error: unknown) => {
   }
 
   return message;
-};
+}
 
 function useAxiosFetch(dataUrl: string) {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 
-  dataUrl = `${baseApiUrl}${dataUrl}`;
+  dataUrl = `${BASE_API_URL}${dataUrl}`;
 
   useEffect(() => {
     let isMounted = true;
