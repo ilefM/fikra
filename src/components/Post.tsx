@@ -10,7 +10,7 @@ export default function Post(props: IPost) {
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.35 }}
     >
-      <p className="mb-2 text-clip break-words font-medium">{props.username}</p>
+      <p className="mb-2 text-clip break-words font-medium">{props.author}</p>
       <p className="word-break break-words">{props.content}</p>
     </motion.div>
   );

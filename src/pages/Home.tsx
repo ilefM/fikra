@@ -1,28 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddPost from "../components/AddPost";
 import Post from "../components/Post";
 import { motion } from "framer-motion";
+import useAxiosFetch from "../hooks/useAxiosFetch";
+import { IPost } from "../interfaces/IPost";
 
 export default function Home() {
-  const [posts, setPosts] = useState([{}]);
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const { data, fetchError, isLoading } = useAxiosFetch("/posts");
+
+  useEffect(() => {
+    if (data) {
+      setPosts(data);
+    }
+  }, [data]);
 
   function addPost(content: string) {
-    setPosts((newPosts) => {
-      return [
-        {
-          id: crypto.randomUUID(),
-          username: "new user",
-          content,
-        },
-        ...newPosts,
-      ];
-    });
+    // setPosts((newPosts) => {
+    //   return [
+    //     {
+    //       id: crypto.randomUUID(),
+    //       createdAt: new Date(),
+    //       author: "new user",
+    //       content,
+    //     },
+    //     ...newPosts,
+    //   ];
+    // });
   }
 
   return (
     <div className="h-full w-10/12 md:w-[700px]">
       <AddPost addNewPost={addPost} />
-      {posts.length === 0 ? (
+      {!fetchError && isLoading && <IsLoading />}
+      {fetchError && <FetchError error={fetchError} />}
+      {!fetchError && !isLoading && posts.length === 0 ? (
         <NoPosts />
       ) : (
         <div className="flex flex-col items-center space-y-6">
@@ -36,13 +48,30 @@ export default function Home() {
             >
               <Post
                 id={post.id}
-                username={post.username}
+                createdAt={post.createdAt}
+                author={post.author}
                 content={post.content}
               />
             </motion.div>
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function IsLoading() {
+  return (
+    <div className="my-12 text-center text-xl">
+      <p>Loading...</p>
+    </div>
+  );
+}
+
+function FetchError({ error }: { error: string }) {
+  return (
+    <div className="my-12 text-center text-xl">
+      <p>{error}</p>
     </div>
   );
 }
