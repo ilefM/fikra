@@ -15,18 +15,18 @@ export default function Home() {
     }
   }, [data]);
 
-  function addPost(content: string) {
-    // setPosts((newPosts) => {
-    //   return [
-    //     {
-    //       id: crypto.randomUUID(),
-    //       createdAt: new Date(),
-    //       author: "new user",
-    //       content,
-    //     },
-    //     ...newPosts,
-    //   ];
-    // });
+  async function addPost(content: string) {
+    setPosts((newPosts) => {
+      return [
+        {
+          id: crypto.randomUUID(),
+          createdAt: new Date(),
+          author: "new user",
+          content,
+        },
+        ...newPosts,
+      ];
+    });
   }
 
   return (

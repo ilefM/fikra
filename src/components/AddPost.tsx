@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { BsSendFill } from "react-icons/bs";
+import { addNewPost } from "../api/posts";
 
 interface IProps {
   addNewPost: (content: string) => void;
@@ -8,14 +9,17 @@ interface IProps {
 export default function AddPost(props: IProps) {
   const [content, setContent] = useState("");
 
-  function publishPost(e: FormEvent<HTMLFormElement>) {
+  async function publishPost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (content === "") {
-      // Display error message
-      return;
+    try {
+      const data = await addNewPost(content);
+      console.log(data);
+
+      props.addNewPost(content);
+    } catch (e) {
+      console.log(e);
     }
-    props.addNewPost(content);
 
     setContent("");
   }
