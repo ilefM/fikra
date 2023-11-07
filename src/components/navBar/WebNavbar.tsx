@@ -29,7 +29,7 @@ function NavigationPanelOnline() {
         to="/cheesecake"
         className="mr-2 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
-        cheesecake
+        binary_dev
       </Link>
     </div>
   );

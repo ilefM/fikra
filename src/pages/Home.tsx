@@ -15,17 +15,9 @@ export default function Home() {
     }
   }, [data]);
 
-  async function addPost(content: string) {
+  async function addPost(post: IPost) {
     setPosts((newPosts) => {
-      return [
-        {
-          id: crypto.randomUUID(),
-          createdAt: new Date(),
-          author: "new user",
-          content,
-        },
-        ...newPosts,
-      ];
+      return [post, ...newPosts];
     });
   }
 

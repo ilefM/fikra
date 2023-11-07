@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
 import { BsSendFill } from "react-icons/bs";
 import { addNewPost } from "../api/posts";
+import { IPost } from "../interfaces/IPost";
 
 interface IProps {
-  addNewPost: (content: string) => void;
+  addNewPost: (post: IPost) => void;
 }
 
 export default function AddPost(props: IProps) {
@@ -14,11 +15,9 @@ export default function AddPost(props: IProps) {
 
     try {
       const data = await addNewPost(content);
-      console.log(data);
-
-      props.addNewPost(content);
+      props.addNewPost(data);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     setContent("");
@@ -35,7 +34,14 @@ export default function AddPost(props: IProps) {
           }}
           className="no-scrollbar min-h-[100px] w-full resize-none break-words bg-transparent outline-none"
         />
-        <button className="ml-auto mt-5 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear">
+        <button
+          disabled={content.trim() === ""}
+          className={`ml-auto mt-5 ${
+            content.trim() === ""
+              ? "text-gray-400 hover:text-gray-400"
+              : "text-red-custom hover:text-gray-200"
+          }  hover:transition-all hover:ease-linear`}
+        >
           <BsSendFill size={17} />
         </button>
       </form>
