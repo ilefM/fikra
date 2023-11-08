@@ -4,7 +4,7 @@ import MobileNavbar from "../components/navBar/MobileNavbar";
 
 export default function Layout() {
   return (
-    <div className="m-0 flex h-full min-h-screen w-full flex-col overflow-hidden p-0 text-dark-0">
+    <div className="m-0 mt-3 flex h-full min-h-screen w-full flex-col overflow-hidden p-0 text-dark-0">
       <div className="flex flex-col">
         <div className="hidden sm:block">
           <WebNavBar />
