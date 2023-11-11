@@ -4,6 +4,8 @@ import Post from "../components/Post";
 import { motion } from "framer-motion";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import { IPost } from "../interfaces/IPost";
+import IsLoading from "../components/IsLoading";
+import FetchError from "../components/FetchError";
 
 export default function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -48,22 +50,6 @@ export default function Home() {
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-function IsLoading() {
-  return (
-    <div className="my-12 text-center text-xl">
-      <p>Loading...</p>
-    </div>
-  );
-}
-
-function FetchError({ error }: { error: string }) {
-  return (
-    <div className="my-12 text-center text-xl">
-      <p>{error}</p>
     </div>
   );
 }
