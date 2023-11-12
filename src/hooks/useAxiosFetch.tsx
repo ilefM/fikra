@@ -21,6 +21,7 @@ function useAxiosFetch(dataUrl: string) {
   const [isLoading, setIsLoading] = useState(false);
 
   dataUrl = `${BASE_API_URL}${dataUrl}`;
+  console.log("dataUrl", dataUrl);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,6 +33,7 @@ function useAxiosFetch(dataUrl: string) {
         const response = await axios.get(url, {
           cancelToken: cancelToken.token,
         });
+        console.log("response", response);
         if (isMounted) {
           setData(response.data);
           setFetchError(null);
