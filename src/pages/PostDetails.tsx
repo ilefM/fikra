@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { IPost } from "../interfaces/IPost";
 import { useParams } from "react-router-dom";
-import useAxiosFetch from "../hooks/useAxiosFetch";
+import useGetPost from "../hooks/useGetPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
+import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
 
 function PostDetails() {
   const { id } = useParams();
-  const { data, fetchError, isLoading } = useAxiosFetch(`/posts/${id}`);
+  const { data, fetchError, isLoading } = useGetPost(id ? id : "");
   const [post, setPost] = useState<IPost>();
-
-  console.log("data", data);
-  console.log("fetchError", fetchError);
-  console.log("isLoading", isLoading);
 
   useEffect(() => {
     if (data) {
@@ -34,7 +31,9 @@ function PostDetails() {
           // TODO: Make the textarea height fit the content
           <div className="flex flex-col sm:flex-row w-full sm:max-w-[700px] md:max-w-[800px] sm:justify-between">
             <div className="mb-6 sm:mb-0 h-1/2 rounded-lg sm:w-[200px] md:w-[400px] bg-dark-200 p-3 shadow-md">
-              <textarea className="w-full resize-none break-words bg-transparent outline-none"></textarea>
+              <textarea className="w-full resize-none break-words bg-transparent outline-none">
+                {post?.content}
+              </textarea>
             </div>
             <div className="flex flex-col sm:w-[300px] items-start">
               <div className="w-full flex flex-col items-start mb-5 space-y-7">
@@ -44,7 +43,11 @@ function PostDetails() {
                 </div>
                 <div className="w-full">
                   <p>Published at:</p>
-                  <p>{post?.createdAt.toDateString()}</p>
+                  <p>
+                    {post
+                      ? ConvertDateToYYYYMMDDFormat(post.createdAt)
+                      : "No date"}
+                  </p>
                 </div>
                 <div className="w-full">
                   <p>ID:</p>

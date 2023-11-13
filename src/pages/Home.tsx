@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import AddPost from "../components/AddPost";
 import Post from "../components/Post";
 import { motion } from "framer-motion";
-import useAxiosFetch from "../hooks/useAxiosFetch";
+import useGetPosts from "../hooks/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 
 export default function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const { data, fetchError, isLoading } = useAxiosFetch("/posts");
+  const { data, fetchError, isLoading } = useGetPosts();
 
   useEffect(() => {
     if (data) {
@@ -22,8 +22,6 @@ export default function Home() {
       return [post, ...newPosts];
     });
   }
-
-  console.log("fetchError", fetchError);
 
   return (
     <div className="h-full w-10/12 md:w-[700px]">

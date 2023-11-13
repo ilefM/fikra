@@ -1,27 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_API_URL } from "../utils/api";
+import { getErrorMessage } from "./error";
+import { IPost } from "../interfaces/IPost";
 
-function getErrorMessage(error: unknown) {
-  let message: string;
-  if (error instanceof Error) {
-    message = error.message;
-  } else if (error && typeof error === "object" && "message" in error) {
-    message = String(error.message);
-  } else {
-    message = "An unknown error has occurred.";
-  }
-
-  return message;
-}
-
-function useAxiosFetch(dataUrl: string) {
-  const [data, setData] = useState([]);
+function useGetPost(postID: string) {
+  const [data, setData] = useState<IPost | null>();
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 
-  dataUrl = `${BASE_API_URL}${dataUrl}`;
-  console.log("dataUrl", dataUrl);
+  const dataUrl = `${BASE_API_URL}/posts/${postID}`;
+
+  if (postID == "") {
+    throw new Error("The post ID isn't correct");
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -33,16 +25,15 @@ function useAxiosFetch(dataUrl: string) {
         const response = await axios.get(url, {
           cancelToken: cancelToken.token,
         });
-        console.log("response", response);
         if (isMounted) {
-          setData(response.data);
           setFetchError(null);
+          setData(response.data);
         }
       } catch (e: unknown) {
         if (isMounted) {
           const message = getErrorMessage(e);
           setFetchError(message);
-          setData([]);
+          setData(null);
         }
       } finally {
         isMounted && setIsLoading(false);
@@ -62,4 +53,4 @@ function useAxiosFetch(dataUrl: string) {
   return { data, fetchError, isLoading };
 }
 
-export default useAxiosFetch;
+export default useGetPost;
