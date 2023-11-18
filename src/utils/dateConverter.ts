@@ -1,15 +1,11 @@
 export function ConvertDateToYYYYMMDDFormat(date: Date) {
-  console.log(date);
+  const newDate = new Date(date);
 
-  date.toLocaleDateString();
+  newDate.toLocaleDateString();
 
-  const year = date.getFullYear();
-  const month = ("0" + (date.getMonth() + 1)).slice(-2); // Months are 0-based in JavaScript
-  const day = ("0" + date.getDate()).slice(-2);
-
-  console.log(year);
-  console.log(month);
-  console.log(day);
+  const year = newDate.getFullYear();
+  const month = ("0" + (newDate.getMonth() + 1)).slice(-2); // Months are 0-based in JavaScript
+  const day = ("0" + newDate.getDate()).slice(-2);
 
   return `${year}-${month}-${day}`;
 }
