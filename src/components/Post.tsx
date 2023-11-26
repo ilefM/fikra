@@ -15,7 +15,9 @@ export default function Post(props: IPost) {
           <CgDetailsMore size={20} />
         </Link>
       </div>
-      <p className="word-break break-words">{props.content}</p>
+      <p className="whitespace-pre-line break-words break-all">
+        {props.content}
+      </p>
     </div>
   );
 }

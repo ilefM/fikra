@@ -6,12 +6,14 @@ import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
 import { updatePost } from "../api/posts";
+import { IoCopyOutline } from "react-icons/io5";
 
 function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
   const [post, setPost] = useState<IPost>();
   const [postUpdated, setPostUpdated] = useState<IPost>();
+  const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
     if (data) {
@@ -32,6 +34,10 @@ function PostDetails() {
     }
   }
 
+  function copyId() {
+    if (post) navigator.clipboard.writeText(post.id);
+  }
+
   return (
     <>
       {isLoading && <IsLoading />}
@@ -41,11 +47,15 @@ function PostDetails() {
       ) : (
         !fetchError &&
         !isLoading && (
-          // TODO: Make the textarea height fit the content
-          <div className="flex flex-col sm:flex-row w-full sm:max-w-[700px] md:max-w-[800px] sm:justify-between">
-            <div className="mb-6 sm:mb-0 h-1/2 rounded-lg sm:w-[200px] md:w-[400px] bg-dark-200 p-3 shadow-md">
+          <div className="flex flex-col w-full sm:max-w-[600px]">
+            <div className="flex justify-between mb-3">
+              <p>{post?.author}</p>
+              <p>{post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}</p>
+            </div>
+
+            <div className=" mb-9 rounded-lg bg-dark-200 p-3 shadow-md">
               <textarea
-                className="w-full resize-none break-words bg-transparent outline-none"
+                className="w-full h-[200px] resize-none break-words bg-transparent outline-none"
                 defaultValue={post?.content}
                 onChange={(e) => {
                   postUpdated &&
@@ -53,24 +63,19 @@ function PostDetails() {
                 }}
               />
             </div>
-            <div className="flex flex-col sm:w-[300px] items-start">
-              <div className="w-full flex flex-col items-start mb-5 space-y-7">
-                <div className="w-full">
-                  <p>Author: </p>
-                  <p>{post?.author}</p>
-                </div>
-                <div className="w-full">
-                  <p>Published at:</p>
-                  <p>
-                    {post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : "N/A"}
-                  </p>
-                </div>
-                <div className="w-full">
-                  <p>ID:</p>
-                  <p>{post?.id}</p>
+            <div className="flex flex-col items-start">
+              <div className="w-full flex flex-col items-start mb-16 space-y-5">
+                <div>
+                  <p>Post ID :</p>
+                  <div className="flex items-center">
+                    <p className="mr-2">{post?.id}</p>
+                    <button onClick={copyId}>
+                      <IoCopyOutline size="18" />
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="flex w-full justify-around sm:justify-between">
+              <div className="flex w-full justify-around">
                 <button
                   className="border-2 border-dark-0 py-1 px-3 rounded-md"
                   onClick={saveChanges}
@@ -81,6 +86,7 @@ function PostDetails() {
                   Delete
                 </button>
               </div>
+              <p className="mt-4 mx-auto text-green-400">{saveMessage}</p>
             </div>
           </div>
         )

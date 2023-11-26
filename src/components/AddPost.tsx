@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { BsSendFill } from "react-icons/bs";
 import { addNewPost } from "../api/posts";
 import { IPost } from "../interfaces/IPost";
@@ -8,7 +8,16 @@ interface IProps {
 }
 
 export default function AddPost(props: IProps) {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height =
+        textAreaRef.current.scrollHeight + "px";
+    }
+  }, [content]);
 
   async function publishPost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,7 +41,9 @@ export default function AddPost(props: IProps) {
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          className="no-scrollbar min-h-[100px] w-full resize-none break-words bg-transparent outline-none"
+          className="no-scrollbar w-full resize-none break-words bg-transparent outline-none"
+          rows={2}
+          ref={textAreaRef}
         />
         <button
           disabled={content.trim() === ""}
