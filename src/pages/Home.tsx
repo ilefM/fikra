@@ -44,7 +44,6 @@ export default function Home() {
               >
                 <Post
                   id={post.id}
-                  createdAt={post.createdAt}
                   author={post.author}
                   content={post.content}
                 />

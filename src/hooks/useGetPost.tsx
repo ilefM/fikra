@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_API_URL } from "../utils/api";
 import { getErrorMessage } from "./error";
-import { IPost } from "../interfaces/IPost";
+import { IPostDetails } from "../interfaces/IPost";
 
 function useGetPost(postID: string) {
-  const [data, setData] = useState<IPost | null>();
+  const [data, setData] = useState<IPostDetails | null>();
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 

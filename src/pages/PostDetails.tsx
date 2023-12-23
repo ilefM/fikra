@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IPost } from "../interfaces/IPost";
+import { IPostDetails } from "../interfaces/IPost";
 import { useParams } from "react-router-dom";
 import useGetPost from "../hooks/useGetPost";
 import IsLoading from "../components/IsLoading";
@@ -11,9 +11,8 @@ import { IoCopyOutline } from "react-icons/io5";
 function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
-  const [post, setPost] = useState<IPost>();
-  const [postUpdated, setPostUpdated] = useState<IPost>();
-  const [saveMessage, setSaveMessage] = useState("");
+  const [post, setPost] = useState<IPostDetails>();
+  const [postUpdated, setPostUpdated] = useState<IPostDetails>();
 
   useEffect(() => {
     if (data) {
@@ -86,7 +85,6 @@ function PostDetails() {
                   Delete
                 </button>
               </div>
-              <p className="mt-4 mx-auto text-green-400">{saveMessage}</p>
             </div>
           </div>
         )
