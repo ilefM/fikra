@@ -1,8 +1,8 @@
 import axios from "axios";
 import { BASE_API_URL } from "../utils/api";
-import { IPost } from "../interfaces/IPost";
+import { IPostDetails } from "../interfaces/IPost";
 
-export async function addNewPost(content: string) {
+export async function addNewPost(content: string): Promise<IPostDetails> {
   if (content != "") {
     const data = {
       content: content,
@@ -14,7 +14,7 @@ export async function addNewPost(content: string) {
   throw new Error("You cannot publish an empty content");
 }
 
-export async function updatePost(post: IPost) {
+export async function updatePost(post: IPostDetails): Promise<IPostDetails> {
   if (post.content != "") {
     const data = {
       content: post.content,
