@@ -5,7 +5,7 @@ import useGetPost from "../hooks/useGetPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
-import { updatePost } from "../api/posts";
+import { deletePost, updatePost } from "../api/posts";
 import { IoCopyOutline } from "react-icons/io5";
 
 function PostDetails() {
@@ -21,15 +21,23 @@ function PostDetails() {
     }
   }, [data]);
 
-  function saveChanges() {
+  async function saveChanges() {
     if (post !== postUpdated && postUpdated) {
       try {
-        updatePost(postUpdated);
+        const res = await updatePost(postUpdated);
+        console.log(res);
       } catch (e) {
         if (e instanceof Error) {
           console.log(e.message);
         }
       }
+    }
+  }
+
+  async function removePost() {
+    if (post) {
+      const res = await deletePost(post.id);
+      console.log(res);
     }
   }
 
@@ -47,12 +55,11 @@ function PostDetails() {
         !fetchError &&
         !isLoading && (
           <div className="flex flex-col w-full sm:max-w-[600px]">
-            <div className="flex justify-between mb-3">
+            <div className="mb-3">
               <p>{post?.author}</p>
-              <p>{post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}</p>
             </div>
 
-            <div className=" mb-9 rounded-lg bg-dark-200 p-3 shadow-md">
+            <div className="rounded-lg bg-dark-200 p-3 shadow-md">
               <textarea
                 className="w-full h-[200px] resize-none break-words bg-transparent outline-none"
                 defaultValue={post?.content}
@@ -62,7 +69,20 @@ function PostDetails() {
                 }}
               />
             </div>
-            <div className="flex flex-col items-start">
+            <p className="text-gray-400">
+              Created :{" "}
+              {post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}
+            </p>
+            {post?.updatedAt != post?.createdAt ? (
+              <p className="text-gray-400">
+                Updated :{" "}
+                {post ? ConvertDateToYYYYMMDDFormat(post.updatedAt) : ""}
+              </p>
+            ) : (
+              ""
+            )}
+
+            <div className="mt-9 flex flex-col items-start">
               <div className="w-full flex flex-col items-start mb-16 space-y-5">
                 <div>
                   <p>Post ID :</p>
@@ -81,7 +101,10 @@ function PostDetails() {
                 >
                   Save
                 </button>
-                <button className="border-2 border-red-custom py-1 px-3 rounded-md">
+                <button
+                  className="border-2 border-red-custom py-1 px-3 rounded-md"
+                  onClick={removePost}
+                >
                   Delete
                 </button>
               </div>
