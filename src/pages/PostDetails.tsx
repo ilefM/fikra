@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { IPostDetails } from "../interfaces/IPost";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetPost from "../hooks/useGetPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
-import { deletePost, updatePost } from "../api/posts";
-import { IoCopyOutline } from "react-icons/io5";
+import { deletePost, updatePost } from "../api/postsApi";
 
 function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
   const [post, setPost] = useState<IPostDetails>();
   const [postUpdated, setPostUpdated] = useState<IPostDetails>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -36,8 +36,12 @@ function PostDetails() {
 
   async function removePost() {
     if (post) {
-      const res = await deletePost(post.id);
-      console.log(res);
+      const status = await deletePost(post.id);
+      if (status !== 200) {
+        console.log("Error while deleting post");
+        return;
+      }
+      navigate("/");
     }
   }
 
@@ -55,10 +59,17 @@ function PostDetails() {
         !fetchError &&
         !isLoading && (
           <div className="flex flex-col w-full sm:max-w-[600px]">
-            <div className="mb-3">
+            <div className="mb-3 flex flex-col sm:flex-row sm:justify-between w-full">
               <p>{post?.author}</p>
+              <div className="flex items-center">
+                <button
+                  className="mr-2 cursor-pointer text-gray-400"
+                  onClick={copyId}
+                >
+                  {post?.id}
+                </button>
+              </div>
             </div>
-
             <div className="rounded-lg bg-dark-200 p-3 shadow-md">
               <textarea
                 className="w-full h-[200px] resize-none break-words bg-transparent outline-none"
@@ -70,12 +81,11 @@ function PostDetails() {
               />
             </div>
             <p className="text-gray-400">
-              Created :{" "}
-              {post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}
+              Posted : {post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}
             </p>
             {post?.updatedAt != post?.createdAt ? (
               <p className="text-gray-400">
-                Updated :{" "}
+                Modified :{" "}
                 {post ? ConvertDateToYYYYMMDDFormat(post.updatedAt) : ""}
               </p>
             ) : (
@@ -83,17 +93,6 @@ function PostDetails() {
             )}
 
             <div className="mt-9 flex flex-col items-start">
-              <div className="w-full flex flex-col items-start mb-16 space-y-5">
-                <div>
-                  <p>Post ID :</p>
-                  <div className="flex items-center">
-                    <p className="mr-2">{post?.id}</p>
-                    <button onClick={copyId}>
-                      <IoCopyOutline size="18" />
-                    </button>
-                  </div>
-                </div>
-              </div>
               <div className="flex w-full justify-around">
                 <button
                   className="border-2 border-dark-0 py-1 px-3 rounded-md"

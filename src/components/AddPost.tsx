@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { BsSendFill } from "react-icons/bs";
-import { addNewPost } from "../api/posts";
+import { addNewPost } from "../api/postsApi";
 import { IPost } from "../interfaces/IPost";
 
 interface IProps {
@@ -23,8 +23,8 @@ export default function AddPost(props: IProps) {
     e.preventDefault();
 
     try {
-      const data = await addNewPost(content);
-      props.addNewPost(data);
+      const response = await addNewPost(content);
+      props.addNewPost(response.data);
     } catch (e) {
       console.error(e);
     }
@@ -49,8 +49,8 @@ export default function AddPost(props: IProps) {
           disabled={content.trim() === ""}
           className={`ml-auto mt-5 ${
             content.trim() === ""
-              ? "text-gray-400 hover:text-gray-400"
-              : "text-red-custom hover:text-gray-200"
+              ? "text-gray-500"
+              : "text-gray-100 cursor-pointer"
           }  hover:transition-all hover:ease-linear`}
         >
           <BsSendFill size={17} />

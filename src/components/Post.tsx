@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { CgDetailsMore } from "react-icons/cg";
 
 export default function Post(props: IPost) {
-  console.log(props);
   return (
     <div className="flex w-full flex-col items-start rounded-lg bg-dark-200 p-5 shadow-md">
       <div className=" mb-2 flex items-center justify-between w-full">
@@ -11,7 +10,7 @@ export default function Post(props: IPost) {
         <Link
           to={`/postDetails/${props.id}`}
           className="hover:transition-all hover:ease-linear
-          text-red-custom hover:text-gray-200"
+          text-gray-300"
         >
           <CgDetailsMore size={20} />
         </Link>
