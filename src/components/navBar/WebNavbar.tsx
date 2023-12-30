@@ -26,7 +26,7 @@ function NavigationPanelOnline() {
       <Link to="/">Feed</Link>
       <Link to="/explore">Explore</Link>
       <Link
-        to="/binary_dev"
+        to="/me"
         className="mr-2 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
         binary_dev

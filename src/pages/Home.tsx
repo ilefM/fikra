@@ -7,7 +7,7 @@ import { IPost } from "../interfaces/IPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 
-export default function Home() {
+function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const { data, fetchError, isLoading } = useGetPosts();
 
@@ -63,3 +63,5 @@ function NoPosts() {
     </div>
   );
 }
+
+export default Home;
