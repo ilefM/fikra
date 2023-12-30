@@ -1,21 +1,33 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { BsSendFill } from "react-icons/bs";
+import { addNewPost } from "../api/postsApi";
+import { IPost } from "../interfaces/IPost";
 
 interface IProps {
-  addNewPost: (content: string) => void;
+  addNewPost: (post: IPost) => void;
 }
 
 export default function AddPost(props: IProps) {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState("");
 
-  function publishPost(e: FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height =
+        textAreaRef.current.scrollHeight + "px";
+    }
+  }, [content]);
+
+  async function publishPost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (content === "") {
-      // Display error message
-      return;
+    try {
+      const response = await addNewPost(content);
+      props.addNewPost(response.data);
+    } catch (e) {
+      console.error(e);
     }
-    props.addNewPost(content);
 
     setContent("");
   }
@@ -29,9 +41,18 @@ export default function AddPost(props: IProps) {
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          className="no-scrollbar min-h-[100px] w-full resize-none break-words bg-transparent outline-none"
+          className="no-scrollbar w-full resize-none break-words bg-transparent outline-none"
+          rows={2}
+          ref={textAreaRef}
         />
-        <button className="ml-auto mt-5 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear">
+        <button
+          disabled={content.trim() === ""}
+          className={`ml-auto mt-5 ${
+            content.trim() === ""
+              ? "text-gray-500"
+              : "text-gray-100 cursor-pointer"
+          }  hover:transition-all hover:ease-linear`}
+        >
           <BsSendFill size={17} />
         </button>
       </form>
