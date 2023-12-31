@@ -7,7 +7,7 @@ import FetchError from "../components/FetchError";
 import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
 import { deletePost, updatePost } from "../api/postsApi";
 
-function PostDetails() {
+export default function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
   const [post, setPost] = useState<IPostDetails>();
@@ -95,13 +95,13 @@ function PostDetails() {
             <div className="mt-9 flex flex-col items-start">
               <div className="flex w-full justify-around">
                 <button
-                  className="border-2 border-dark-0 py-1 px-3 rounded-md"
+                  className="border-2 border-[#8AEA92] text-[#8AEA92] p-[1.5px] px-2 rounded-md"
                   onClick={saveChanges}
                 >
                   Save
                 </button>
                 <button
-                  className="border-2 border-red-custom py-1 px-3 rounded-md"
+                  className="border-2 border-red-600 text-red-600 p-[1.5px] px-2 rounded-md"
                   onClick={removePost}
                 >
                   Delete
@@ -122,5 +122,3 @@ function NoDetails() {
     </div>
   );
 }
-
-export default PostDetails;

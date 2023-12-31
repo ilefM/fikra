@@ -10,15 +10,15 @@ export default function MobileNavbar() {
         <BiHomeAlt2 size="22px" />
       </Link>
 
-      <button>
-        <BiSearch size="22px" />
-      </button>
-
       <Link to="/explore">
         <MdOutlineExplore size="22px" />
       </Link>
 
-      <Link to="/profile">
+      <button>
+        <BiSearch size="22px" />
+      </button>
+
+      <Link to="/me">
         <AiOutlineUser size="22px" />
       </Link>
     </div>
