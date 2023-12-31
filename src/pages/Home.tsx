@@ -6,8 +6,9 @@ import useGetPosts from "../hooks/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
+import NoPosts from "../components/NoPost";
 
-function Home() {
+export default function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const { data, fetchError, isLoading } = useGetPosts();
 
@@ -24,7 +25,7 @@ function Home() {
   }
 
   return (
-    <div className="h-full w-10/12 md:w-[700px]">
+    <div className="h-full w-10/12 sm:max-w-[700px]">
       <AddPost addNewPost={addPost} />
       {isLoading && <IsLoading />}
       {!isLoading && fetchError && <FetchError error={fetchError} />}
@@ -55,13 +56,3 @@ function Home() {
     </div>
   );
 }
-
-function NoPosts() {
-  return (
-    <div className="my-12 text-center text-xl">
-      <p>No publication found :/</p>
-    </div>
-  );
-}
-
-export default Home;

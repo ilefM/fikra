@@ -1,7 +1,7 @@
-export default function IsLoading() {
+export default function NoPosts() {
   return (
     <div className="my-12 text-center text-xl">
-      <p>Loading...</p>
+      <p>No publication found :/</p>
     </div>
   );
 }
