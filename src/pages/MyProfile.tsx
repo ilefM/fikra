@@ -4,7 +4,6 @@ import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
-import NoPosts from "../components/NoPost";
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -30,11 +29,7 @@ export default function MyProfile() {
       <div className="flex flex-col w-full">
         {isLoading && <IsLoading />}
         {!isLoading && fetchError && <FetchError error={fetchError} />}
-        {!fetchError && !isLoading && posts.length === 0 ? (
-          <NoPosts />
-        ) : (
-          <PostsList posts={posts} />
-        )}
+        {!fetchError && !isLoading && <PostsList posts={posts} />}
       </div>
     </div>
   );
