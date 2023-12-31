@@ -24,7 +24,6 @@ function NavigationPanelOnline() {
         <Searchbar />
       </div>
       <Link to="/">Feed</Link>
-      <Link to="/explore">Explore</Link>
 
       <Link
         to="/me"

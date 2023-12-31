@@ -1,7 +1,7 @@
 export default function NotFound() {
   return (
     <div>
-      <p className="text-xl">Content comming soon...</p>
+      <p className="text-xl">Page not found !</p>
     </div>
   );
 }
