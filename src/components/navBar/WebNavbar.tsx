@@ -28,7 +28,7 @@ function NavigationPanelOnline() {
 
       <Link
         to="/me"
-        className="mr-2  hover:text-gray-400 hover:transition-all hover:ease-linear"
+        className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
         @binary_dev
       </Link>
