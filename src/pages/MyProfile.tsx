@@ -22,7 +22,10 @@ export default function MyProfile() {
           <p>binary dev</p>
           <p className="text-gray-400">@binary_dev</p>
         </div>
-        <button className="bg-dark-200 mt-3 xs:mt-0 border-dark-0 h-10 px-3 rounded-md">
+        <button
+          className="bg-dark-200 mt-3 xs:mt-0 border-dark-0 h-10 px-3 rounded-md"
+          onClick={() => alert("This feature is not implemented yet ")}
+        >
           Edit profile
         </button>
       </div>
