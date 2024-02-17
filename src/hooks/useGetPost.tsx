@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_API_URL } from "../utils/api";
 import { getErrorMessage } from "./error";
 import { IPostDetails } from "../interfaces/IPost";
+import { getApiUrl } from "../utils/api";
 
 function useGetPost(postID: string) {
   const [data, setData] = useState<IPostDetails | null>();
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const dataUrl = `${BASE_API_URL}/posts/${postID}`;
+  const BASE_API_URL = `${getApiUrl()}/posts/${postID}`;
 
   if (postID == "") {
     throw new Error("The post ID isn't correct");
@@ -40,7 +40,7 @@ function useGetPost(postID: string) {
       }
     }
 
-    fetchData(dataUrl);
+    fetchData(BASE_API_URL);
 
     const cleanUp = () => {
       isMounted = false;
@@ -48,7 +48,7 @@ function useGetPost(postID: string) {
     };
 
     return cleanUp;
-  }, [dataUrl]);
+  }, [BASE_API_URL]);
 
   return { data, fetchError, isLoading };
 }

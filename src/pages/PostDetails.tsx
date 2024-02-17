@@ -25,10 +25,9 @@ export default function PostDetails() {
     if (post !== postUpdated && postUpdated) {
       try {
         const res = await updatePost(postUpdated);
-        console.log(res);
       } catch (e) {
         if (e instanceof Error) {
-          console.log(e.message);
+          // Handle error
         }
       }
     }

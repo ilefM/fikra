@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import { BASE_API_URL } from "../utils/api";
 import { IPostDetails } from "../interfaces/IPost";
+import { getApiUrl } from "../utils/api";
+
+const BASE_API_URL = getApiUrl();
 
 export async function addNewPost(
   content: string
