@@ -24,7 +24,7 @@ export default function PostDetails() {
   async function saveChanges() {
     if (post !== postUpdated && postUpdated) {
       try {
-        const res = await updatePost(postUpdated);
+        await updatePost(postUpdated);
       } catch (e) {
         if (e instanceof Error) {
           // Handle error
