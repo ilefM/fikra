@@ -6,10 +6,8 @@ export default function ThemeSwitcher() {
 
   function changeTheme() {
     if (darkMode) {
-      console.log("switched to light mode");
       setDarkMode(false);
     } else {
-      console.log("switched to dark mode");
       setDarkMode(true);
     }
   }

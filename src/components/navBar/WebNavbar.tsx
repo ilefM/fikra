@@ -3,17 +3,14 @@ import Searchbar from "../Searchbar";
 
 export default function WebNavBar() {
   return (
-    <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 md:px-8">
-      <div className="flex w-1/2 items-center">
+    <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 sm:px-8">
+      <div className="flex w-1/4 items-center">
         <Link
           to="/"
-          className="lg:text-3xl mr-4 text-2xl text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear md:mr-10"
+          className="lg:text-3xl mr-4 text-2xl text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear sm:mr-10"
         >
           Fikra
         </Link>
-        <div className="w-2/3">
-          <Searchbar />
-        </div>
       </div>
       <NavigationPanelOnline />
     </div>
@@ -22,14 +19,17 @@ export default function WebNavBar() {
 
 function NavigationPanelOnline() {
   return (
-    <div className="lg:text-lg flex w-1/2 items-center justify-end space-x-7 text-base">
+    <div className="lg:text-lg flex w-full items-center justify-end space-x-7 text-base">
+      <div className="w-2/3">
+        <Searchbar />
+      </div>
       <Link to="/">Feed</Link>
-      <Link to="/explore">Explore</Link>
+
       <Link
-        to="/cheesecake"
-        className="mr-2 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear"
+        to="/me"
+        className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
-        cheesecake
+        @binary_dev
       </Link>
     </div>
   );

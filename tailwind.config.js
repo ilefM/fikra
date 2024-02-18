@@ -3,6 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
+      xs: "400px",
       sm: "600px",
       md: "768px",
     },
@@ -16,9 +17,6 @@ export default {
           300: "#1A2026",
           200: "#273139",
           0: "#F8F9FA",
-        },
-        light: {
-          200: "#F1F5F9",
         },
       },
     },
