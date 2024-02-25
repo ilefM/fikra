@@ -1,4 +1,4 @@
-export function ConvertDateToYYYYMMDDFormat(date: Date) {
+export function ConvertDateFormat(date: Date) {
   const newDate = new Date(date);
 
   newDate.toLocaleDateString();
