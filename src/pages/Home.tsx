@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AddPost from "../components/AddPost";
-import useGetPosts from "../hooks/useGetPosts";
+import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";

@@ -1,26 +1,22 @@
 import { useState, useEffect } from "react";
+import { getErrorMessage } from "../error";
+import { IPost } from "../../interfaces/IPost";
+import { getPosts } from "../../api/postsApi";
 import axios from "axios";
-import { getErrorMessage } from "./error";
-import { IPost } from "../interfaces/IPost";
-import { getApiUrl } from "../utils/api";
 
 function useGetPosts() {
   const [data, setData] = useState<IPost[]>([]);
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const BASE_API_URL = `${getApiUrl()}/posts`;
-
   useEffect(() => {
     let isMounted = true;
-    const cancelToken = axios.CancelToken.source();
+    const source = axios.CancelToken.source();
 
-    async function fetchData(url: string) {
+    async function fetchData() {
       setIsLoading(true);
       try {
-        const response = await axios.get(url, {
-          cancelToken: cancelToken.token,
-        });
+        const response = await getPosts();
         if (isMounted) {
           setData(response.data);
           setFetchError(null);
@@ -36,15 +32,18 @@ function useGetPosts() {
       }
     }
 
-    fetchData(BASE_API_URL);
+    fetchData();
+
+    const intervalId = setInterval(() => fetchData(), 240000);
 
     const cleanUp = () => {
       isMounted = false;
-      cancelToken.cancel();
+      source.cancel();
+      clearInterval(intervalId);
     };
 
     return cleanUp;
-  }, [BASE_API_URL]);
+  }, []);
 
   return { data, fetchError, isLoading };
 }

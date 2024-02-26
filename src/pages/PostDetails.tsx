@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IPostDetails } from "../interfaces/IPost";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetPost from "../hooks/useGetPost";
+import useGetPost from "../hooks/posts/useGetPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
 import { ConvertDateFormat } from "../utils/dateConverter";
