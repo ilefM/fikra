@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { IPostDetails } from "../interfaces/IPost";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetPost from "../hooks/useGetPost";
+import useGetPost from "../hooks/posts/useGetPost";
 import IsLoading from "../components/IsLoading";
 import FetchError from "../components/FetchError";
-import { ConvertDateToYYYYMMDDFormat } from "../utils/dateConverter";
+import { ConvertDateFormat } from "../utils/dateConverter";
 import { deletePost, updatePost } from "../api/postsApi";
 
 export default function PostDetails() {
@@ -80,12 +80,11 @@ export default function PostDetails() {
               />
             </div>
             <p className="text-gray-400">
-              Posted : {post ? ConvertDateToYYYYMMDDFormat(post.createdAt) : ""}
+              Posted : {post ? ConvertDateFormat(post.createdAt) : ""}
             </p>
             {post?.updatedAt != post?.createdAt ? (
               <p className="text-gray-400">
-                Modified :{" "}
-                {post ? ConvertDateToYYYYMMDDFormat(post.updatedAt) : ""}
+                Modified : {post ? ConvertDateFormat(post.updatedAt) : ""}
               </p>
             ) : (
               ""

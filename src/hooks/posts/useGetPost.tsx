@@ -1,30 +1,26 @@
 import { useState, useEffect } from "react";
+import { getErrorMessage } from "../error";
+import { IPostDetails } from "../../interfaces/IPost";
 import axios from "axios";
-import { getErrorMessage } from "./error";
-import { IPostDetails } from "../interfaces/IPost";
-import { getApiUrl } from "../utils/api";
+import { getPost } from "../../api/postsApi";
 
 function useGetPost(postID: string) {
   const [data, setData] = useState<IPostDetails | null>();
   const [fetchError, setFetchError] = useState(null as string | null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const BASE_API_URL = `${getApiUrl()}/posts/${postID}`;
-
-  if (postID == "") {
+  if (!postID || postID === "") {
     throw new Error("The post ID isn't correct");
   }
 
   useEffect(() => {
     let isMounted = true;
-    const cancelToken = axios.CancelToken.source();
+    const source = axios.CancelToken.source();
 
-    async function fetchData(url: string) {
+    async function fetchData() {
       setIsLoading(true);
       try {
-        const response = await axios.get(url, {
-          cancelToken: cancelToken.token,
-        });
+        const response = await getPost(postID);
         if (isMounted) {
           setFetchError(null);
           setData(response.data);
@@ -40,15 +36,15 @@ function useGetPost(postID: string) {
       }
     }
 
-    fetchData(BASE_API_URL);
+    fetchData();
 
     const cleanUp = () => {
       isMounted = false;
-      cancelToken.cancel();
+      source.cancel();
     };
 
     return cleanUp;
-  }, [BASE_API_URL]);
+  }, [postID]);
 
   return { data, fetchError, isLoading };
 }

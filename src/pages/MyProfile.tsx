@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useGetPosts from "../hooks/useGetPosts";
+import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
 import IsLoading from "../components/IsLoading";

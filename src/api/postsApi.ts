@@ -1,8 +1,18 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { IPostDetails } from "../interfaces/IPost";
-import { getApiUrl } from "../utils/api";
+import { axiosInstance } from "./axios";
 
-const BASE_API_URL = getApiUrl();
+export async function getPosts() {
+  const response = await axiosInstance.get("/posts");
+
+  return response;
+}
+
+export async function getPost(id: string) {
+  const response = await axiosInstance.get(`/posts/${id}`);
+
+  return response;
+}
 
 export async function addNewPost(
   content: string
@@ -12,7 +22,7 @@ export async function addNewPost(
       content: content,
     };
 
-    const response = await axios.post(`${BASE_API_URL}/posts/`, data);
+    const response = await axiosInstance.post(`/posts/`, data);
 
     return response;
   }
@@ -28,7 +38,7 @@ export async function updatePost(
       content: post.content,
     };
 
-    const response = await axios.put(`${BASE_API_URL}/posts/${post.id}`, data);
+    const response = await axiosInstance.put(`/posts/${post.id}`, data);
 
     return response;
   }
@@ -37,7 +47,7 @@ export async function updatePost(
 }
 
 export async function deletePost(postId: string): Promise<number> {
-  const response = await axios.delete(`${BASE_API_URL}/posts/${postId}`);
+  const response = await axiosInstance.delete(`/posts/${postId}`);
 
   return response.status;
 }
