@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { IPost } from "../interfaces/IPost";
 import Post from "./Post";
 
@@ -11,7 +10,7 @@ export default function PostsList({ posts }: IProps) {
     <>
       {posts.length !== 0 ? (
         <div className="flex flex-col items-center space-y-6">
-          {posts.map((post, i) => (
+          {posts.map((post) => (
             // <motion.div
             //   className="w-full"
             //   key={post.id}
