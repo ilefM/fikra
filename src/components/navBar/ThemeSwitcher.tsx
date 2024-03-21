@@ -6,10 +6,11 @@ export default function ThemeSwitcher() {
   const [darkMode, setDarkMode] = useState(true);
 
   function changeTheme() {
-    const bodyClass = document.body.classList;
-    console.log(bodyClass);
-    darkMode ? bodyClass.remove("dark") : bodyClass.add("dark");
-    setDarkMode(!darkMode);
+    if (darkMode) {
+      setDarkMode(false);
+    } else {
+      setDarkMode(true);
+    }
   }
   return (
     <span

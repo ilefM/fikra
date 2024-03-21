@@ -4,6 +4,7 @@ export default {
   darkMode: "class",
   theme: {
     screens: {
+      xs: "400px",
       sm: "600px",
       md: "768px",
       lg: "1280px",
@@ -19,12 +20,15 @@ export default {
           200: "#273139",
           0: "#F8F9FA",
         },
+<<<<<<< HEAD
         light: {
           300: "#F8F9FA",
           200: "#E9ECEF",
           100: "#DEE2E6",
           0: "#F8F9FA",
         },
+=======
+>>>>>>> main
       },
     },
   },

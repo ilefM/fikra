@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Searchbar from "../Searchbar";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function WebNavBar() {
   return (
+<<<<<<< HEAD
     <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 md:px-8">
       <div className="flex w-1/2 items-center">
         <Link
@@ -15,24 +15,45 @@ export default function WebNavBar() {
         <div className="w-2/3 md:ml-5">
           <Searchbar />
         </div>
+=======
+    <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 sm:px-8">
+      <div className="flex w-1/4 items-center">
+        <Link
+          to="/"
+          className="lg:text-3xl mr-4 text-2xl text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear sm:mr-10"
+        >
+          Fikra
+        </Link>
+>>>>>>> main
       </div>
 
       <NavigationPanelOnline />
-      <ThemeSwitcher />
     </div>
   );
 }
 
 function NavigationPanelOnline() {
   return (
+<<<<<<< HEAD
     <div className="flex w-1/2 items-center justify-end space-x-7 text-base lg:text-lg">
+=======
+    <div className="lg:text-lg flex w-full items-center justify-end space-x-7 text-base">
+      <div className="w-2/3">
+        <Searchbar />
+      </div>
+>>>>>>> main
       <Link to="/">Feed</Link>
-      <Link to="/explore">Explore</Link>
+
       <Link
+<<<<<<< HEAD
         to="/cheesecake"
         className="mr-2 text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear"
+=======
+        to="/me"
+        className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
+>>>>>>> main
       >
-        cheesecake
+        @binary_dev
       </Link>
     </div>
   );

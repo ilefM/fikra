@@ -1,17 +1,21 @@
-import { motion } from "framer-motion";
 import { IPost } from "../interfaces/IPost";
+import { Link } from "react-router-dom";
+import { CgDetailsMore } from "react-icons/cg";
 
-export default function Post(props: IPost) {
+export default function Post({ id, author, content }: IPost) {
   return (
-    <motion.div
-      className="flex flex-col items-start p-5 rounded-lg shadow-md w-full bg-dark-200
-    "
-      initial={{ opacity: 0, translateY: -50 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={{ duration: 0.35 }}
-    >
-      <p className="font-medium mb-2 text-clip break-words">{props.username}</p>
-      <p className="word-break break-words">{props.content}</p>
-    </motion.div>
+    <div className="flex w-full flex-col items-start rounded-lg bg-dark-200 p-5 shadow-md">
+      <div className=" mb-2 flex items-center justify-between w-full">
+        <p className="text-clip break-words font-medium">{author}</p>
+        <Link
+          to={`/postDetails/${id}`}
+          className="hover:transition-all hover:ease-linear
+          text-gray-300"
+        >
+          <CgDetailsMore size={20} />
+        </Link>
+      </div>
+      <p className="whitespace-pre-line break-words break-all">{content}</p>
+    </div>
   );
 }

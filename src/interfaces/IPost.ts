@@ -1,5 +1,10 @@
 export interface IPost {
   id: string;
-  username: string;
+  author: string;
   content: string;
+}
+
+export interface IPostDetails extends IPost {
+  createdAt: Date;
+  updatedAt: Date;
 }
