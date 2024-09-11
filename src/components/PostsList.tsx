@@ -18,7 +18,9 @@ export default function PostsList({ posts }: IProps) {
             //   animate={{ opacity: 1, translateY: 0 }}
             //   transition={{ duration: 0.35, delay: i * 0.2 }}
             // >
-            <Post id={post.id} author={post.author} content={post.content} />
+            <div key={post.id}>
+              <Post id={post.id} author={post.author} content={post.content} />
+            </div>
             // </motion.div>
           ))}
         </div>
