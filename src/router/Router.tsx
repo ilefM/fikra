@@ -14,8 +14,8 @@ export default function Router() {
         <Route index element={<Home />} />
         <Route path="/postDetails/:id" element={<PostDetails />} />
         <Route path="/me" element={<MyProfile />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
