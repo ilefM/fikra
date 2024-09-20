@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Layout from "./Layout";
 import NotFound from "../pages/NotFound";
-import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import PostDetails from "../pages/PostDetails";
 import MyProfile from "../pages/MyProfile";
+import SignIn from "../pages/SignIn";
 
 export default function Router() {
   return (
@@ -14,7 +14,7 @@ export default function Router() {
         <Route index element={<Home />} />
         <Route path="/postDetails/:id" element={<PostDetails />} />
         <Route path="/me" element={<MyProfile />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
       </Route>

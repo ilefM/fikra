@@ -26,10 +26,10 @@ function NavigationPanelOnline() {
       <Link to="/">Feed</Link>
 
       <Link
-        to="/me"
+        to="/login"
         className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
-        @binary_dev
+        Login
       </Link>
     </div>
   );
