@@ -26,7 +26,7 @@ function NavigationPanelOnline() {
       <Link to="/">Feed</Link>
 
       <Link
-        to="/login"
+        to="/signin"
         className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
       >
         Login

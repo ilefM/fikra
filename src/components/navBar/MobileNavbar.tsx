@@ -19,7 +19,7 @@ export default function MobileNavbar() {
         <BiSearch size="22px" />
       </button>
 
-      <Link to={"/login"}>
+      <Link to={"/signin"}>
         <BiLogIn size="22px" />
       </Link>
       {/* <Link to="/me">
