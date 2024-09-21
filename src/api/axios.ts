@@ -17,3 +17,10 @@ export const axiosInstance: AxiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export function handleAxiosError(error: unknown): Error {
+  if (axios.isAxiosError(error)) {
+    return new Error(error.response?.data?.message || "server request failed");
+  }
+  return new Error("Unexpected error occurred");
+}
