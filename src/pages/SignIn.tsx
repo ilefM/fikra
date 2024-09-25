@@ -21,7 +21,6 @@ export default function SignIn() {
         setIsLoading(false);
       } catch (e: unknown) {
         setIsLoading(false);
-        console.log("an error occupred");
         const message = getErrorMessage(e);
         setError(message);
       }

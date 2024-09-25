@@ -13,7 +13,7 @@ export default function Layout() {
           <MobileNavbar />
         </div>
         <div className="mx-8 mb-14 mt-8 flex flex-col items-center justify-center sm:mb-8 sm:mt-16">
-          <Outlet />
+          <Outlet context={} />
         </div>
       </div>
     </div>
