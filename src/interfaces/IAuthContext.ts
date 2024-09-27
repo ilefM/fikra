@@ -1,9 +1,7 @@
-export interface AuthContextType {
-  user: User;
-  signin: (user: string, callback: VoidFunction) => void;
-}
+import { Dispatch, SetStateAction } from "react";
+import { IConnectedUser } from "./IConnectedUser";
 
-interface User {
-  userId: string;
-  username: string;
+export interface IAuthContext {
+  user: IConnectedUser | null;
+  setUser: Dispatch<SetStateAction<IConnectedUser | null>>;
 }

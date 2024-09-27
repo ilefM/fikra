@@ -1,11 +1,11 @@
 import { AxiosPromise } from "axios";
 import { axiosInstance, handleAxiosError } from "./axios";
-import { ILoggerUser } from "../interfaces/ILoggerUser";
+import { IConnectedUser } from "../interfaces/IConnectedUser";
 
 export async function signIn(
   login: string,
   password: string
-): AxiosPromise<ILoggerUser> {
+): AxiosPromise<IConnectedUser> {
   const data = {
     login: login,
     password: password,
@@ -16,7 +16,6 @@ export async function signIn(
 
     return response;
   } catch (e: unknown) {
-    console.log("enter in catch");
     const error = handleAxiosError(e);
     throw error;
   }

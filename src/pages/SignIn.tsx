@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signIn } from "../api/authApi";
 import { getErrorMessage } from "../hooks/error";
 import IsLoading from "../components/IsLoading";
+import useAuth from "../hooks/auth/useAuth";
+import { IConnectedUser } from "../interfaces/IConnectedUser";
 
 export default function SignIn() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   async function handleLogin() {
     setError("");
@@ -18,7 +23,15 @@ export default function SignIn() {
       setIsLoading(true);
       try {
         const response = await signIn(login, password);
+        const connectedUser: IConnectedUser = {
+          userId: response.data.userId,
+          username: response.data.username,
+        };
+        auth.setUser(connectedUser);
+
+        const from = location.state?.from.pathname || "/";
         setIsLoading(false);
+        navigate(from, { replace: true });
       } catch (e: unknown) {
         setIsLoading(false);
         const message = getErrorMessage(e);

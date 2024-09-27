@@ -1,4 +1,4 @@
-export interface ILoggerUser {
+export interface IConnectedUser {
   userId: string;
   username: string;
 }
