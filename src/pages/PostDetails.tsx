@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IPostDetails } from "../interfaces/IPost";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPost from "../hooks/posts/useGetPost";
@@ -13,13 +13,18 @@ export default function PostDetails() {
   const [post, setPost] = useState<IPostDetails>();
   const [postUpdated, setPostUpdated] = useState<IPostDetails>();
   const navigate = useNavigate();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (data) {
       setPost(data);
       setPostUpdated(data);
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      }
     }
-  }, [data]);
+  }, [data, post?.content]);
 
   async function saveChanges() {
     if (post !== postUpdated && postUpdated) {
@@ -35,8 +40,8 @@ export default function PostDetails() {
 
   async function removePost() {
     if (post) {
-      const status = await deletePost(post.id);
-      if (status !== 200) {
+      const response = await deletePost(post.id);
+      if (response.status !== 200) {
         console.log("Error while deleting post");
         return;
       }
@@ -59,7 +64,7 @@ export default function PostDetails() {
         !isLoading && (
           <div className="flex flex-col w-full sm:max-w-[600px]">
             <div className="mb-3 flex flex-col sm:flex-row sm:justify-between w-full">
-              <p>{post?.author}</p>
+              <p>{post?.authorUsername}</p>
               <div className="flex items-center">
                 <button
                   className="mr-2 cursor-pointer text-gray-400"
@@ -71,12 +76,15 @@ export default function PostDetails() {
             </div>
             <div className="rounded-lg bg-dark-200 p-3 shadow-md">
               <textarea
-                className="w-full h-[200px] resize-none break-words bg-transparent outline-none"
+                className="w-full resize-none bg-transparent outline-none"
                 defaultValue={post?.content}
                 onChange={(e) => {
                   postUpdated &&
                     setPostUpdated({ ...postUpdated, content: e.target.value });
                 }}
+                rows={1} // Start with one row
+                style={{ resize: "none", overflow: "hidden" }}
+                ref={textareaRef}
               />
             </div>
             <p className="text-gray-400">

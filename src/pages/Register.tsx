@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function SignUp() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin() {
+  function handleRegister() {
     console.log(email, username, password);
   }
 
@@ -61,7 +61,7 @@ export default function SignUp() {
 
       <button
         className="bg-dark-200 w-full rounded-lg p-2 mt-10"
-        onClick={handleLogin}
+        onClick={handleRegister}
       >
         Login
       </button>

@@ -28,7 +28,6 @@ export default function SignIn() {
           username: response.data.username,
         };
         auth.setUser(connectedUser);
-
         const from = location.state?.from.pathname || "/";
         setIsLoading(false);
         navigate(from, { replace: true });

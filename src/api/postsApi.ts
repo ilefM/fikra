@@ -44,7 +44,7 @@ export async function updatePost(
   throw new Error("You cannot publish an empty content");
 }
 
-export async function deletePost(postId: string): AxiosPromise<number> {
+export async function deletePost(postId: string): AxiosPromise<void> {
   const response = await axiosInstance.delete(`/posts/${postId}`);
 
   return response;
