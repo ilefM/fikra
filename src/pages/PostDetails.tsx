@@ -3,7 +3,7 @@ import { IPostDetails } from "../interfaces/IPost";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPost from "../hooks/posts/useGetPost";
 import IsLoading from "../components/IsLoading";
-import FetchError from "../components/FetchError";
+import FetchError from "../components/Error";
 import { ConvertDateFormat } from "../utils/dateConverter";
 import { deletePost, updatePost } from "../api/postsApi";
 

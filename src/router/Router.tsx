@@ -5,8 +5,9 @@ import NotFound from "../pages/NotFound";
 import PostDetails from "../pages/PostDetails";
 import MyProfile from "../pages/MyProfile";
 import SignIn from "../pages/SignIn";
-import RequireAuth from "../components/RequireAuth";
+import RequireAuth from "../guards/AuthGuard";
 import Register from "../pages/Register";
+import LoggedInGuard from "../guards/LoggedInGuard";
 
 export default function Router() {
   return (
@@ -22,7 +23,14 @@ export default function Router() {
             </RequireAuth>
           }
         />
-        <Route path="/signin" element={<SignIn />} />
+        <Route
+          path="/signin"
+          element={
+            <LoggedInGuard>
+              <SignIn />
+            </LoggedInGuard>
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Route>

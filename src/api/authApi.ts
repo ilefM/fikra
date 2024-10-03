@@ -2,6 +2,9 @@ import { AxiosPromise } from "axios";
 import { axiosInstance, handleAxiosError } from "./axios";
 import { IConnectedUser } from "../interfaces/IConnectedUser";
 
+// TODO: Verify the code quality of following functions
+// Do I really need to make try catch blocks in every function, error handeling ??
+
 export async function signIn(
   login: string,
   password: string
@@ -19,4 +22,12 @@ export async function signIn(
     const error = handleAxiosError(e);
     throw error;
   }
+}
+
+export async function signOut(): AxiosPromise<void> {
+  const response = await axiosInstance.post("/auth/signout", {
+    withCredentials: true,
+  });
+
+  return response;
 }

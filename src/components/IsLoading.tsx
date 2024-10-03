@@ -21,9 +21,9 @@ export default function IsLoading() {
           </svg>
           <span className="sr-only">Loading...</span>
         </div>
-        <p className="text-center text-sm mt-8">
+        <p className="text-center text-md mt-8">
           {
-            "You may exprience some latency on your first request to the server due to cold boot. Thank you for you patiente :)"
+            "Since we are using a free tier server instance (we are poor af), you may experience some latency on your first request to the server due to cold boot. Thank you for your patiente :)"
           }
         </p>
       </div>

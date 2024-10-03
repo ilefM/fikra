@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/auth/useAuth";
 
-export default function RequireAuth({ children }: { children: JSX.Element }) {
+export default function AuthGuard({ children }: { children: JSX.Element }) {
   const auth = useAuth();
   const location = useLocation();
 

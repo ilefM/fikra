@@ -44,7 +44,10 @@ export default function SignIn() {
       {isLoading ? (
         <IsLoading />
       ) : (
-        <div className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12">
+        <form
+          onSubmit={handleLogin}
+          className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12"
+        >
           <h1 className="text-2xl font-bold mb-4">Sign in</h1>
           <p className="text-red-400 text-sm">{error}</p>
           <div className="flex flex-col w-full mt-2">
@@ -83,7 +86,7 @@ export default function SignIn() {
               Join Fikra
             </Link>
           </div>
-        </div>
+        </form>
       )}
     </>
   );

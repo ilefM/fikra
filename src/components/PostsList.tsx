@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import useAuth from "../hooks/auth/useAuth";
 import { IPost } from "../interfaces/IPost";
 import Post from "./Post";
 
@@ -36,9 +38,23 @@ export default function PostsList({ posts }: IProps) {
 }
 
 function NoPosts() {
+  const auth = useAuth();
+
   return (
-    <div className="my-12 text-center text-xl">
-      <p>No publication found :/</p>
+    <div className="w-full bg-dark-300 rounded-2xl p-10 my-12 text-center space-y-4">
+      <p>No publications found :/</p>
+      <p>Be the first to talk about your project ideas !</p>
+      {!auth.user && (
+        <div className="flex justify-center space-x-3">
+          <Link to={"/singin"} className="underline">
+            Sign in
+          </Link>
+          <p>or</p>
+          <Link to={"/register"} className="underline">
+            join Fikra
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

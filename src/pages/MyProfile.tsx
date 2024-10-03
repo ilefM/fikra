@@ -3,7 +3,7 @@ import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
 import IsLoading from "../components/IsLoading";
-import FetchError from "../components/FetchError";
+import FetchError from "../components/Error";
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<IPost[]>([]);
