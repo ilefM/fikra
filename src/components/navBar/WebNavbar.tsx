@@ -1,39 +1,63 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
 import { useState } from "react";
-import IsLoading from "../IsLoading";
 import { signOut } from "../../api/authApi";
 import Error from "../Error";
+import useLoadingModal from "../../hooks/loadingModal/useLoadingModal";
+import { Store } from "react-notifications-component";
 
 export default function WebNavBar() {
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const { isAuthenticated, getCurrentUser, removeUser } = useAuth();
+  const { openModal, closeModal } = useLoadingModal();
   const navigate = useNavigate();
 
   async function handleLogOut() {
-    const errorMessage = "server error on the logout action";
     try {
-      setIsLoading(true);
+      openModal();
       const response = await signOut();
-      setIsLoading(false);
-      removeUser();
-      navigate("/");
+      closeModal();
       if (response.status != 200) {
-        setError(errorMessage);
+        Store.addNotification({
+          title: "Error!",
+          message: "We encountered an error while processing your action ",
+          type: "danger",
+          insert: "bottom",
+          container: "bottom-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true,
+          },
+        });
+      } else {
+        removeUser();
+        navigate("/");
       }
     } catch (e) {
-      setIsLoading(false);
-      setError(errorMessage);
+      closeModal();
+      Store.addNotification({
+        title: "Error!",
+        message: "We encountered an error while processing your action ",
+        type: "danger",
+        insert: "bottom",
+        container: "bottom-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     }
   }
 
   return (
     <>
-      {isLoading && <IsLoading />}
-      {error && !isLoading && <Error error={error} />}
-      {!isLoading && !error && (
+      {error && <Error error={error} />}
+      {!error && (
         <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 sm:px-8">
           <div className="flex w-1/4 items-center">
             <Link

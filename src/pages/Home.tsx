@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AddPost from "../components/AddPost";
 import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
-import IsLoading from "../components/IsLoading";
+import IsLoading from "../components/LoadingModal";
 import Error from "../components/Error";
 import PostsList from "../components/PostsList";
 import useAuth from "../hooks/auth/useAuth";

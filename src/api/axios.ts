@@ -24,12 +24,18 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    if (error.config && error.response?.status === 401) {
+    if (
+      error.config &&
+      error.response?.status === 401 &&
+      error.config.url != "/auth/signin"
+    ) {
       const response = await axiosInstance.post("auth/refresh");
       if (response.status === 200) {
         const response = await axiosInstance(error.config);
         return response;
       }
+    } else {
+      throw error;
     }
   }
 );

@@ -16,7 +16,6 @@ export async function signIn(
 
   try {
     const response = await axiosInstance.post("/auth/signin", data);
-
     return response;
   } catch (e: unknown) {
     const error = handleAxiosError(e);

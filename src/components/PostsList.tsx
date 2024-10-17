@@ -38,15 +38,15 @@ export default function PostsList({ posts }: IProps) {
 }
 
 function NoPosts() {
-  const auth = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="w-full bg-dark-300 rounded-2xl p-10 my-12 text-center space-y-4">
       <p>No publications found :/</p>
-      <p>Be the first to talk about your project ideas !</p>
-      {!auth.user && (
+      <p>Be the first to talk about your ideas !</p>
+      {!isAuthenticated() && (
         <div className="flex justify-center space-x-3">
-          <Link to={"/singin"} className="underline">
+          <Link to={"/signin"} className="underline">
             Sign in
           </Link>
           <p>or</p>

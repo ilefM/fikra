@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
-import IsLoading from "../components/IsLoading";
+import IsLoading from "../components/LoadingModal";
 import FetchError from "../components/Error";
 
 export default function MyProfile() {
