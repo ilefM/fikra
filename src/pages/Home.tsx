@@ -3,14 +3,14 @@ import AddPost from "../components/AddPost";
 import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import IsLoading from "../components/IsLoading";
-import FetchError from "../components/Error";
+import Error from "../components/Error";
 import PostsList from "../components/PostsList";
 import useAuth from "../hooks/auth/useAuth";
 
 export default function Home() {
   const [posts, setPosts] = useState<IPost[]>([]);
   const { data, fetchError, isLoading } = useGetPosts();
-  const auth = useAuth();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (data) {
@@ -26,9 +26,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-10/12 sm:max-w-[700px]">
-      {auth.user && <AddPost addNewPost={addPost} />}
+      {isAuthenticated() && <AddPost addNewPost={addPost} />}
       {isLoading && <IsLoading />}
-      {!isLoading && fetchError && <FetchError error={fetchError} />}
+      {!isLoading && fetchError && <Error error={fetchError} />}
       {!fetchError && !isLoading && <PostsList posts={posts} />}
     </div>
   );

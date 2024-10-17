@@ -3,13 +3,16 @@ import { IPostDetails } from "../interfaces/IPost";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPost from "../hooks/posts/useGetPost";
 import IsLoading from "../components/IsLoading";
-import FetchError from "../components/Error";
+import Error from "../components/Error";
 import { ConvertDateFormat } from "../utils/dateConverter";
 import { deletePost, updatePost } from "../api/postsApi";
+import { getErrorMessage } from "../hooks/error";
 
 export default function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
+  const [error, setError] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const [post, setPost] = useState<IPostDetails>();
   const [postUpdated, setPostUpdated] = useState<IPostDetails>();
   const navigate = useNavigate();
@@ -24,15 +27,22 @@ export default function PostDetails() {
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
     }
-  }, [data, post?.content]);
+    if (fetchError) {
+      setError(fetchError);
+    }
+  }, [data, post?.content, setError, fetchError]);
 
   async function saveChanges() {
     if (post !== postUpdated && postUpdated) {
       try {
+        setIsProcessing(true);
         await updatePost(postUpdated);
+        setIsProcessing(false);
       } catch (e) {
+        setIsProcessing(false);
         if (e instanceof Error) {
-          // Handle error
+          const message = getErrorMessage(e);
+          setError(message);
         }
       }
     }
@@ -42,7 +52,7 @@ export default function PostDetails() {
     if (post) {
       const response = await deletePost(post.id);
       if (response.status !== 200) {
-        console.log("Error while deleting post");
+        setError;
         return;
       }
       navigate("/");
@@ -55,8 +65,8 @@ export default function PostDetails() {
 
   return (
     <>
-      {isLoading && <IsLoading />}
-      {!isLoading && fetchError && <FetchError error={fetchError} />}
+      {(isLoading || isProcessing) && <IsLoading />}
+      {(!isLoading || !isProcessing) && error && <Error error={error} />}
       {!fetchError && !isLoading && !post ? (
         <NoDetails />
       ) : (
@@ -64,7 +74,7 @@ export default function PostDetails() {
         !isLoading && (
           <div className="flex flex-col w-full sm:max-w-[600px]">
             <div className="mb-3 flex flex-col sm:flex-row sm:justify-between w-full">
-              <p>{post?.authorUsername}</p>
+              <p>@{post?.authorUsername}</p>
               <div className="flex items-center">
                 <button
                   className="mr-2 cursor-pointer text-gray-400"

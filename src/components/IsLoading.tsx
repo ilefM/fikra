@@ -1,6 +1,6 @@
 export default function IsLoading() {
   return (
-    <div className="rounded-2xl bg-dark-300 w-11/12 sm:max-w-[450px] mt-12">
+    <div className="rounded-2xl bg-dark-300 mx-auto w-11/12 sm:max-w-[450px] mt-12">
       <div className="p-10">
         <div className=" flex justify-center items-center" role="status">
           <svg

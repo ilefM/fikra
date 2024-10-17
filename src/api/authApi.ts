@@ -25,9 +25,7 @@ export async function signIn(
 }
 
 export async function signOut(): AxiosPromise<void> {
-  const response = await axiosInstance.post("/auth/signout", {
-    withCredentials: true,
-  });
+  const response = await axiosInstance.post("/auth/signout");
 
   return response;
 }

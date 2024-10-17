@@ -1,20 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
 import { useState } from "react";
 import IsLoading from "../IsLoading";
 import { signOut } from "../../api/authApi";
+import Error from "../Error";
 
 export default function WebNavBar() {
-  const auth = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function logout() {
+  const { isAuthenticated, getCurrentUser, removeUser } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogOut() {
     const errorMessage = "server error on the logout action";
     try {
       setIsLoading(true);
       const response = await signOut();
       setIsLoading(false);
+      removeUser();
+      navigate("/");
       if (response.status != 200) {
         setError(errorMessage);
       }
@@ -26,37 +31,37 @@ export default function WebNavBar() {
 
   return (
     <>
-      {isLoading ? (
-        <IsLoading />
-      ) : (
+      {isLoading && <IsLoading />}
+      {error && !isLoading && <Error error={error} />}
+      {!isLoading && !error && (
         <div className="flex h-16 w-full items-center justify-between overflow-hidden px-4 sm:px-8">
           <div className="flex w-1/4 items-center">
             <Link
               to="/"
-              className="lg:text-3xl mr-4 text-2xl text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear sm:mr-10"
+              className="mr-4 text-xl text-red-custom hover:text-gray-400 hover:transition-all hover:ease-linear sm:mr-10"
             >
               Fikra
             </Link>
           </div>
-          <div className="lg:text-lg flex w-full items-center justify-end space-x-7 text-base">
+          <div className="flex w-full items-center justify-end space-x-7">
             {/* <div className="w-2/3">
           <Searchbar />
         </div> */}
             <Link to="/">Feed</Link>
 
-            {auth.user ? (
+            {isAuthenticated() ? (
               <>
                 <Link
                   to="/me"
                   className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
                 >
-                  userConnected
+                  @{getCurrentUser().username}
                 </Link>
                 <button
-                  className="bg-[#ac2f2f] p-2 ml-2 rounded-md hover:text-dark-400 hover:bg-light-200 hover:transition-all hover:ease-linear hover:duration-300"
-                  onClick={logout}
+                  className="text-red-custom ml-1 hover:text-gray-400 hover:transition-all hover:ease-linea"
+                  onClick={handleLogOut}
                 >
-                  Logout
+                  Log Out
                 </button>
               </>
             ) : (
@@ -65,7 +70,7 @@ export default function WebNavBar() {
                   className="hover:text-gray-400 mr-2 hover:transition-all hover:ease-linear"
                   to="/signin"
                 >
-                  Sign in
+                  Sign In
                 </Link>
                 <Link
                   className="bg-[#ac2f2f] p-2 ml-2 rounded-md hover:text-dark-400 hover:bg-light-200 hover:transition-all hover:ease-linear hover:duration-300"
@@ -77,7 +82,7 @@ export default function WebNavBar() {
             )}
           </div>
         </div>
-      )}{" "}
+      )}
     </>
   );
 }
