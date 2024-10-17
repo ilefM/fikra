@@ -26,7 +26,6 @@ export default function SignIn() {
       openModal();
       try {
         const response = await signIn(login, password);
-        console.log(response);
         storeUser(response.data.userId, response.data.username);
         const from = location.state?.from.pathname || "/";
         closeModal();
@@ -50,9 +49,9 @@ export default function SignIn() {
         <div className="flex flex-col w-full mt-2">
           <label htmlFor="email">Email or username</label>
           <input
-            type="email"
-            id="email"
-            name="email"
+            type="text"
+            id="text"
+            name="text"
             placeholder="Email or username"
             className="border border-gray-300 text-black rounded-md p-2 mt-1"
             onChange={(e) => setLogin(e.target.value)}
