@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import useGetPosts from "../hooks/posts/useGetPosts";
 import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
-import IsLoading from "../components/LoadingModal";
-import FetchError from "../components/Error";
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -30,9 +28,7 @@ export default function MyProfile() {
         </button>
       </div>
       <div className="flex flex-col w-full">
-        {isLoading && <IsLoading />}
-        {!isLoading && fetchError && <FetchError error={fetchError} />}
-        {!fetchError && !isLoading && <PostsList posts={posts} />}
+        <PostsList posts={posts} />
       </div>
     </div>
   );
