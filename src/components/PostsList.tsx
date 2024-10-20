@@ -11,7 +11,7 @@ export default function PostsList({ posts }: IProps) {
   return (
     <>
       {posts.length !== 0 ? (
-        <div className="flex flex-col items-center space-y-6">
+        <div className="w-full flex flex-col items-center space-y-6">
           {posts.map((post) => (
             // <motion.div
             //   className="w-full"

@@ -15,6 +15,12 @@ export default function Home() {
   const { openModal, closeModal } = useLoadingModal();
 
   useEffect(() => {
+    if (isLoading) {
+      openModal();
+    } else {
+      closeModal();
+    }
+
     if (fetchError) {
       Store.addNotification({
         title: "Error!",
@@ -26,7 +32,7 @@ export default function Home() {
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 5000,
+          duration: 3000,
           onScreen: true,
         },
       });
@@ -34,13 +40,7 @@ export default function Home() {
     if (data) {
       setPosts(data);
     }
-  }, [data, fetchError]);
-
-  if (isLoading) {
-    openModal();
-  } else {
-    closeModal();
-  }
+  }, [data, fetchError, isLoading, openModal, closeModal]);
 
   async function addPost(post: IPost) {
     setPosts((newPosts) => {

@@ -31,19 +31,6 @@ export default function WebNavBar() {
       } else {
         removeUser();
         navigate("/");
-        Store.addNotification({
-          title: "Success !",
-          message: "You logged out successfully",
-          type: "success",
-          insert: "bottom",
-          container: "bottom-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
       }
     } catch (e) {
       closeModal();
