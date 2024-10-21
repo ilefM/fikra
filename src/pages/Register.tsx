@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useLoadingModal from "../hooks/loadingModal/useLoadingModal";
+import useAuth from "../hooks/auth/useAuth";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { storeUser } = useAuth();
+  const { openModal, closeModal } = useLoadingModal();
+  const navigate = useNavigate();
 
-  function handleRegister() {
-    console.log(email, username, password);
+  function handleRegister(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
   }
 
   return (
-    <div className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12">
+    <form
+      className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12"
+      onSubmit={handleRegister}
+    >
       <h1 className="text-2xl font-bold mb-8">Sign up</h1>
       <div className="flex flex-col w-full">
         <label htmlFor="email">Email</label>
@@ -59,10 +68,7 @@ export default function Register() {
         />
       </div>
 
-      <button
-        className="bg-dark-200 w-full rounded-lg p-2 mt-10"
-        onClick={handleRegister}
-      >
+      <button className="bg-dark-200 w-full rounded-lg p-2 mt-10" type="submit">
         Login
       </button>
 
@@ -72,6 +78,6 @@ export default function Register() {
           Sign in
         </Link>
       </div>
-    </div>
+    </form>
   );
 }
