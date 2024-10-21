@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 const getApiUrl = (): string => {
   let apiUrl: string = import.meta.env.VITE_BASE_FIKRA_API_LOCALHOST_URL;
@@ -16,4 +16,33 @@ export const axiosInstance: AxiosInstance = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
+
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response;
+  },
+  async (error: AxiosError) => {
+    if (
+      error.config &&
+      error.response?.status === 401 &&
+      error.config.url != "/auth/signin"
+    ) {
+      const response = await axiosInstance.post("auth/refresh");
+      if (response.status === 200) {
+        const response = await axiosInstance(error.config);
+        return response;
+      }
+    } else {
+      throw error;
+    }
+  }
+);
+
+export function handleAxiosError(error: unknown): Error {
+  if (axios.isAxiosError(error)) {
+    return new Error(error.response?.data?.message || "server request failed");
+  }
+  return new Error("Unexpected error occurred");
+}

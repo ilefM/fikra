@@ -18,6 +18,9 @@ export default {
           200: "#273139",
           0: "#F8F9FA",
         },
+        blue: {
+          custom: "#3a506b",
+        },
       },
     },
   },
