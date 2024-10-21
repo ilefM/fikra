@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import useAuth from "../hooks/auth/useAuth";
 
 export default function LoggedInGuard({ children }: { children: JSX.Element }) {
-  const auth = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (auth?.user) {
+  if (isAuthenticated()) {
     return <Navigate to="/" />;
   }
   return children;
