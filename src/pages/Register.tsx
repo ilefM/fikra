@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useLoadingModal from "../hooks/loadingModal/useLoadingModal";
 import useAuth from "../hooks/auth/useAuth";
+import { register } from "../api/authApi";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -12,16 +13,32 @@ export default function Register() {
   const { openModal, closeModal } = useLoadingModal();
   const navigate = useNavigate();
 
-  function handleRegister(e: FormEvent<HTMLFormElement>) {
+  async function handleRegister(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (email === "" || username === "" || password === "") {
+      setError("All fields are required");
+    } else {
+      openModal();
+      try {
+        const response = await register(email, username, password);
+        storeUser(response.data.userId, response.data.username);
+        closeModal();
+        navigate("/");
+      } catch (e) {
+        closeModal();
+        setError("An error occured while creating your account");
+      }
+    }
   }
 
   return (
     <form
-      className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12"
+      className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center"
       onSubmit={handleRegister}
     >
-      <h1 className="text-2xl font-bold mb-8">Sign up</h1>
+      <h1 className="text-2xl font-bold mb-8">Register</h1>
+      <p className="text-red-400 text-sm">{error}</p>
       <div className="flex flex-col w-full">
         <label htmlFor="email">Email</label>
         <input
@@ -68,8 +85,11 @@ export default function Register() {
         />
       </div>
 
-      <button className="bg-dark-200 w-full rounded-lg p-2 mt-10" type="submit">
-        Login
+      <button
+        className="bg-dark-200 hover:bg-dark-200/70 w-full rounded-lg p-2 mt-10"
+        type="submit"
+      >
+        Register
       </button>
 
       <div className="mt-4 flex flex-col sm:space-x-3">

@@ -41,7 +41,7 @@ export default function SignIn() {
   return (
     <form
       onSubmit={handleSignIn}
-      className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center mt-12"
+      className="w-11/12 sm:max-w-[450px] p-3 sm:p-5 bg-dark-300 rounded-2xl flex flex-col items-center"
     >
       <h1 className="text-2xl font-bold mb-4">Sign In</h1>
       <p className="text-red-400 text-sm">{error}</p>
@@ -69,7 +69,7 @@ export default function SignIn() {
       </div>
 
       <button
-        className="bg-dark-200 w-full rounded-lg p-2 mt-10 hover:bg-dark-200/25 hover:transition-colors hover:duration-200"
+        className="bg-dark-200 hover:bg-dark-200/70 w-full rounded-lg p-2 mt-10 hover:transition-colors hover:duration-200"
         type="submit"
       >
         Sign In

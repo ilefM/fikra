@@ -23,8 +23,31 @@ export async function signIn(
   }
 }
 
-export async function signOut(): AxiosPromise<void> {
-  const response = await axiosInstance.post("/auth/signout");
+export async function register(
+  email: string,
+  username: string,
+  password: string
+): AxiosPromise<IConnectedUser> {
+  const data = {
+    username: username,
+    email: email,
+    password: password,
+  };
+  try {
+    const response = await axiosInstance.post("/auth/signup", data);
+    return response;
+  } catch (e: unknown) {
+    const error = handleAxiosError(e);
+    throw error;
+  }
+}
 
-  return response;
+export async function signOut(): AxiosPromise<void> {
+  try {
+    const response = await axiosInstance.post("/auth/signout");
+    return response;
+  } catch (e: unknown) {
+    const error = handleAxiosError(e);
+    throw error;
+  }
 }
