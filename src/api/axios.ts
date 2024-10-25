@@ -29,13 +29,17 @@ axiosInstance.interceptors.response.use(
       error.response?.status === 401 &&
       error.config.url != "/auth/signin"
     ) {
-      const response = await axiosInstance.post("auth/refresh");
-      if (response.status === 200) {
-        const response = await axiosInstance(error.config);
-        return response;
+      try {
+        const response = await axiosInstance.post("auth/refresh");
+        if (response.status === 200) {
+          const responseConfig = await axiosInstance(error.config);
+          return responseConfig;
+        } else {
+          console.log(response);
+        }
+      } catch (e) {
+        throw error;
       }
-    } else {
-      throw error;
     }
   }
 );
