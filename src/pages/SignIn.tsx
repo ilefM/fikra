@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signIn } from "../api/authApi";
-import { getErrorMessage } from "../hooks/error";
 import useAuth from "../hooks/auth/useAuth";
 import useLoadingModal from "../hooks/loadingModal/useLoadingModal";
 
