@@ -12,42 +12,26 @@ export default function WebNavBar() {
   async function handleLogOut() {
     try {
       openModal();
-      const response = await signOut();
+      await signOut();
       closeModal();
-      if (response.status != 200) {
-        Store.addNotification({
-          title: "Error!",
-          message: "We encountered an error while processing your action ",
-          type: "danger",
-          insert: "bottom",
-          container: "bottom-right",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true,
-          },
-        });
-      } else {
-        removeUser();
-        navigate("/");
-      }
     } catch (e) {
       closeModal();
       Store.addNotification({
         title: "Error!",
-        message: "We encountered an error while processing your action " + e,
+        message: "An error occured, but we did sign out",
         type: "danger",
         insert: "bottom",
         container: "bottom-right",
         animationIn: ["animate__animated", "animate__fadeIn"],
         animationOut: ["animate__animated", "animate__fadeOut"],
         dismiss: {
-          duration: 5000,
+          duration: 3000,
           onScreen: true,
         },
       });
     }
+    removeUser();
+    navigate("/");
   }
 
   return (
