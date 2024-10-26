@@ -33,6 +33,7 @@ export async function register(
     email: email,
     password: password,
   };
+
   try {
     const response = await axiosInstance.post("/auth/signup", data);
     return response;

@@ -30,10 +30,9 @@ export default function SignIn() {
         const from = location.state?.from.pathname || "/";
         closeModal();
         navigate(from, { replace: true });
-      } catch (e: unknown) {
+      } catch (e) {
         closeModal();
-        const message = getErrorMessage(e);
-        setError(message);
+        setError("Invalid credentials");
       }
     }
   }
@@ -77,7 +76,7 @@ export default function SignIn() {
 
       <div className="mt-4 text-sm flex flex-col justify-center items-center">
         <p className="text-gray-400">Don't have an account ?</p>
-        <Link to="/signup" className="text-center underline">
+        <Link to="/register" className="text-center underline">
           Join Fikra
         </Link>
       </div>
