@@ -31,9 +31,13 @@ axiosInstance.interceptors.response.use(
       error.config.url != "/auth/signup"
     ) {
       try {
-        await axios.post("auth/refresh", {
-          withCredentials: true,
-        });
+        await axios.post(
+          url + "/auth/refresh",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
         const responseConfig = await axiosInstance(error.config);
         return responseConfig;
       } catch (e) {

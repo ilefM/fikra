@@ -43,10 +43,9 @@ export async function register(
   }
 }
 
-export async function signOut(): AxiosPromise<void> {
+export async function signOut() {
   try {
-    const response = await axiosInstance.post("/auth/signout");
-    return response;
+    await axiosInstance.post("/auth/signout");
   } catch (e: unknown) {
     const error = handleAxiosError(e);
     throw error;

@@ -5,8 +5,8 @@ export default function AuthGuard({ children }: { children: JSX.Element }) {
   const { getCurrentUser } = useAuth();
   const location = useLocation();
 
-  if (getCurrentUser()) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  if (!getCurrentUser()) {
+    return <Navigate to="/signin" state={{ from: location }} replace />;
   }
 
   return children;
