@@ -5,9 +5,9 @@ import NotFound from "../pages/NotFound";
 import PostDetails from "../pages/PostDetails";
 import MyProfile from "../pages/MyProfile";
 import SignIn from "../pages/SignIn";
-import RequireAuth from "../guards/AuthGuard";
 import Register from "../pages/Register";
 import LoggedInGuard from "../guards/LoggedInGuard";
+import AuthGuard from "../guards/AuthGuard";
 
 export default function Router() {
   return (
@@ -18,9 +18,9 @@ export default function Router() {
         <Route
           path="/me"
           element={
-            <RequireAuth>
+            <AuthGuard>
               <MyProfile />
-            </RequireAuth>
+            </AuthGuard>
           }
         />
         <Route

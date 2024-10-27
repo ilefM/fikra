@@ -20,11 +20,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     return user ? true : false;
   }
 
-  function getCurrentUser(): IConnectedUser {
+  function getCurrentUser(): IConnectedUser | null {
     if (user) {
       return user;
     }
-    throw Error("no user connected");
+    return null;
   }
 
   function removeUser() {
