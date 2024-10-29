@@ -46,6 +46,7 @@ export default function AddPost(props: IProps) {
           ref={textAreaRef}
         />
         <button
+          type="submit"
           disabled={content.trim() === ""}
           className={`ml-auto mt-5 ${
             content.trim() === ""
