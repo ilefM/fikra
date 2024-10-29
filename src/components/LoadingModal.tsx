@@ -30,7 +30,7 @@ export default function LoadingModal() {
               </div>
               <p className="text-center text-md mt-8">
                 {
-                  "Since we are using a free tier server instance (we are poor af), you may experience some latency on your first request to the server due to cold boot. Thank you for your patiente :)"
+                  "Since we are using a free tier server instance, you may experience some latency on your first request to the server due to cold boot. Thank you for your patiente :)"
                 }
               </p>
             </div>
