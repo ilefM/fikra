@@ -71,25 +71,11 @@ export default function MyProfile() {
 
   return (
     <div className="flex flex-col items-center max-w-[600px] w-full">
-      <div className="flex flex-col xs:flex-row justify-between mb-14 w-full">
-        <div>
-          <p>binary dev</p>
-          <p className="text-gray-400">@binary_dev</p>
-        </div>
-        <div className="flex flex-col justify-start items-start">
-          {/* <button
-            className="bg-dark-200 mt-3 xs:mt-0 h-10 px-3 rounded-md"
-            onClick={() => alert("This feature is not implemented yet ")}
-          >
-            Edit profile
-          </button> */}
-          <button
-            className="text-red-custom h-10 rounded-md"
-            onClick={handleLogOut}
-          >
-            Logout
-          </button>
-        </div>
+      <div className="flex flex-col items-start mb-14 w-full">
+        <p>@{getCurrentUser().username}</p>
+        <button className="text-red-custom mt-4" onClick={handleLogOut}>
+          Logout
+        </button>
       </div>
       <div className="flex flex-col w-full">
         <PostsList posts={posts} />

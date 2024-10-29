@@ -15,10 +15,12 @@ export default function WebNavBar() {
         </Link>
       </div>
       <div className="flex w-full items-center justify-end space-x-7">
-        {/* <div className="w-2/3">
-          <Searchbar />
-        </div> */}
-        <Link to="/">Feed</Link>
+        <Link
+          className="hover:text-gray-400 hover:transition-all hover:ease-linear"
+          to="/"
+        >
+          Feed
+        </Link>
 
         {isAuthenticated() ? (
           <Link
