@@ -49,3 +49,9 @@ export async function deletePost(postId: string): AxiosPromise<void> {
 
   return response;
 }
+
+export async function getUserPosts(userId: string): AxiosPromise<IPost[]> {
+  const response = await axiosInstance.get(`/users/${userId}/posts`);
+
+  return response;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useGetPosts from "../hooks/posts/useGetPosts";
+import useGetUserPosts from "../hooks/posts/useGetUserPosts";
 import { IPost } from "../interfaces/IPost";
 import PostsList from "../components/PostsList";
 import useLoadingModal from "../hooks/loadingModal/useLoadingModal";
@@ -10,10 +10,11 @@ import useAuth from "../hooks/auth/useAuth";
 
 export default function MyProfile() {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const { data, fetchError, isLoading } = useGetPosts();
+  const { removeUser, getCurrentUser } = useAuth();
+  const userId = getCurrentUser().userId;
+  const { data, fetchError, isLoading } = useGetUserPosts(userId);
   const { openModal, closeModal } = useLoadingModal();
   const navigate = useNavigate();
-  const { removeUser } = useAuth();
 
   useEffect(() => {
     if (isLoading) {
