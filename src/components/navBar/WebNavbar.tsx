@@ -25,7 +25,7 @@ export default function WebNavBar() {
             to="/me"
             className="mr-2 hover:text-gray-400 hover:transition-all hover:ease-linear"
           >
-            @{getCurrentUser()?.username}
+            @{getCurrentUser().username}
           </Link>
         ) : (
           <>
