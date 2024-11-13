@@ -6,12 +6,10 @@ export async function getPosts(): AxiosPromise<IPost[]> {
   try {
     const response = await axiosInstance.get("/posts");
     return response;
-
   } catch (e) {
-    console.log(e)
-    throw e
+    console.log(e);
+    throw e;
   }
-
 }
 
 export async function getPost(id: string): AxiosPromise<IPostDetails> {
