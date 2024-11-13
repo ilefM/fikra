@@ -3,9 +3,13 @@ import { IPost, IPostDetails } from "../interfaces/IPost";
 import { axiosInstance } from "./axios";
 
 export async function getPosts(): AxiosPromise<IPost[]> {
-  const response = await axiosInstance.get("/posts");
-
-  return response;
+  try {
+    const response = await axiosInstance.get("/posts");
+    return response;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 export async function getPost(id: string): AxiosPromise<IPostDetails> {

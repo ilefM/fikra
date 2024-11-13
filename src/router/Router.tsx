@@ -8,6 +8,7 @@ import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
 import LoggedInGuard from "../guards/LoggedInGuard";
 import AuthGuard from "../guards/AuthGuard";
+import About from "../pages/About";
 
 export default function Router() {
   return (
@@ -32,6 +33,7 @@ export default function Router() {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

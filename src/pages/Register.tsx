@@ -15,6 +15,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   async function handleRegister(e: FormEvent<HTMLFormElement>) {
+    console.log("heyyyyy");
     e.preventDefault();
 
     if (email === "" || username === "" || password === "") {
@@ -67,6 +68,7 @@ export default function Register() {
       </div>
       <div className="flex flex-col mt-4 w-full">
         <label htmlFor="password">Password</label>
+        <p className="text-sm text-gray-500">(Minimum 8 characters)</p>
         <input
           type="password"
           id="password"

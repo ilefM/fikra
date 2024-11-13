@@ -1,5 +1,4 @@
-import { BiHomeAlt2, BiSearch, BiUser } from "react-icons/bi";
-import { MdOutlineExplore } from "react-icons/md";
+import { BiHomeAlt2, BiInfoCircle, BiUser } from "react-icons/bi";
 import { BiLogIn } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
@@ -14,13 +13,10 @@ export default function MobileNavbar() {
           <BiHomeAlt2 size="22px" />
         </Link>
 
-        <Link to="/explore">
-          <MdOutlineExplore size="22px" />
+        <Link to="/about">
+          <BiInfoCircle size="23px" />
         </Link>
 
-        <button>
-          <BiSearch size="22px" />
-        </button>
         {isAuthenticated() ? (
           <Link to={"/me"}>
             <BiUser size="22px" />

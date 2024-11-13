@@ -15,7 +15,7 @@ export default function PostDetails() {
   const [postUpdated, setPostUpdated] = useState<IPostDetails>();
   const navigate = useNavigate();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { isAuthenticated } = useAuth();
+  const { getCurrentUser } = useAuth();
   const { openModal, closeModal } = useLoadingModal();
 
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function PostDetails() {
               )}
             </div>
 
-            {isAuthenticated() ? (
+            {getCurrentUser().username === post.authorUsername ? (
               <div className=" flex flex-col justify-around mt-6 items-start">
                 <button
                   className="bg-dark-200 p-2 rounded-md"
