@@ -21,6 +21,12 @@ export default function WebNavBar() {
         >
           Feed
         </Link>
+        <Link
+          className="hover:text-gray-400 hover:transition-all hover:ease-linear"
+          to="/about"
+        >
+          About
+        </Link>
 
         {isAuthenticated() ? (
           <Link

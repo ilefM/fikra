@@ -9,4 +9,6 @@
 - TailwindCss
 - Vercel
 
-Connected to the <a href="https://github.com/ilefM/fikra-api">Fikra-api backend</a> (feature not implemented on client side yet)
+Connected to the <a href="https://github.com/ilefM/fikra-api">Fikra-api backend</a> (feature not implemented on client side yet).
+
+Visit the about page of Fikra to learn more.
