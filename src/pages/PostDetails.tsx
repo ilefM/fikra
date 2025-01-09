@@ -7,12 +7,14 @@ import { deletePost, updatePost } from "../api/postsApi";
 import useAuth from "../hooks/auth/useAuth";
 import { Store } from "react-notifications-component";
 import useLoadingModal from "../hooks/loadingModal/useLoadingModal";
+import { IConnectedUser } from "../interfaces/IConnectedUser";
 
 export default function PostDetails() {
   const { id } = useParams();
   const { data, fetchError, isLoading } = useGetPost(id ? id : "");
   const [post, setPost] = useState<IPostDetails>();
   const [postUpdated, setPostUpdated] = useState<IPostDetails>();
+  const [user, setUser] = useState<IConnectedUser>();
   const navigate = useNavigate();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { getCurrentUser } = useAuth();
@@ -41,6 +43,13 @@ export default function PostDetails() {
           onScreen: true,
         },
       });
+    }
+
+    try {
+      const user = getCurrentUser();
+      setUser(user);
+    } catch (_) {
+      return;
     }
   }, [data, post?.content, fetchError]);
 
@@ -145,6 +154,7 @@ export default function PostDetails() {
               <textarea
                 className="w-full resize-none bg-transparent outline-none"
                 defaultValue={post?.content}
+                disabled={!(user?.username === post.authorUsername)}
                 onChange={(e) => {
                   postUpdated &&
                     setPostUpdated({ ...postUpdated, content: e.target.value });
@@ -167,7 +177,7 @@ export default function PostDetails() {
               )}
             </div>
 
-            {getCurrentUser().username === post.authorUsername ? (
+            {user?.username === post.authorUsername ? (
               <div className=" flex flex-col justify-around mt-6 items-start">
                 <button
                   className="bg-dark-200 p-2 rounded-md"
