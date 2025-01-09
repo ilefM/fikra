@@ -51,7 +51,7 @@ export default function PostDetails() {
     } catch (_) {
       return;
     }
-  }, [data, post?.content, fetchError]);
+  }, [data, post?.content, fetchError, getCurrentUser]);
 
   async function saveChanges() {
     if (post !== postUpdated && postUpdated) {
